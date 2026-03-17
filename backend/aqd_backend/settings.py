@@ -86,10 +86,10 @@ else:
 
 # ── Auth ──────────────────────────────────────────────────────────────
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+    # Only enforce minimum length (8 chars) — removing CommonPasswordValidator
+    # which blocks common but valid passwords like 'admin1234'
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+     'OPTIONS': {'min_length': 8}},
 ]
 
 # ── i18n ──────────────────────────────────────────────────────────────

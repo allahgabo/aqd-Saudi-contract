@@ -37,8 +37,37 @@ export default function AuthPage({ mode = 'login' }: { mode?: 'login' | 'registe
       else { await register({ username: form.username, email: form.email, password: form.password, first_name: form.first_name, last_name: form.last_name }); }
       navigate(from, { replace: true });
     } catch (err: any) {
-      const detail = err.response?.data;
-      setError(typeof detail === 'object' ? Object.entries(detail).map(([k,v]) => `${Array.isArray(v) ? (v as any)[0] : v}`).join(' · ') : detail || 'Authentication failed');
+      const data = err.response?.data;
+      const status = err.response?.status;
+
+      if (!err.response) {
+        setError(lang === 'ar' ? 'لا يمكن الاتصال بالخادم. تأكد من تشغيل الخادم.' : 'Cannot connect to server. Make sure the backend is running.');
+        return;
+      }
+
+      if (status === 401 || (data?.detail && isLogin)) {
+        setError(lang === 'ar' ? 'اسم المستخدم أو كلمة المرور غير صحيحة.' : 'Incorrect username or password.');
+        return;
+      }
+
+      // Parse field-level validation errors from registration
+      if (typeof data === 'object' && data !== null) {
+        const fieldLabels: Record<string, string> = {
+          username: lang === 'ar' ? 'اسم المستخدم' : 'Username',
+          email:    lang === 'ar' ? 'البريد الإلكتروني' : 'Email',
+          password: lang === 'ar' ? 'كلمة المرور' : 'Password',
+          non_field_errors: '',
+        };
+        const messages = Object.entries(data).map(([field, val]) => {
+          const msg = Array.isArray(val) ? (val as any)[0] : val;
+          const label = fieldLabels[field] || field;
+          return label ? `${label}: ${msg}` : String(msg);
+        });
+        setError(messages.join('\n'));
+        return;
+      }
+
+      setError(String(data || (lang === 'ar' ? 'فشل. حاول مجدداً.' : 'Failed. Please try again.')));
     } finally { setLoading(false); }
   };
 
@@ -142,6 +171,11 @@ export default function AuthPage({ mode = 'login' }: { mode?: 'login' | 'registe
                       {showPass ? <EyeOff size={15} /> : <Eye size={15} />}
                     </button>
                   </div>
+                  {!isLogin && (
+                    <div style={{ fontSize: 11, color: 'var(--text-dim)', marginTop: 4 }}>
+                      {lang === 'ar' ? '🔒 8 أحرف على الأقل' : '🔒 Minimum 8 characters'}
+                    </div>
+                  )}
                 </div>
                 {!isLogin && (
                   <div>
@@ -150,7 +184,14 @@ export default function AuthPage({ mode = 'login' }: { mode?: 'login' | 'registe
                   </div>
                 )}
                 {error && (
-                  <div style={{ padding: '10px 14px', borderRadius: 8, background: 'var(--red-bg)', border: '1px solid rgba(239,68,68,0.2)', fontSize: 14, color: 'var(--red)', lineHeight: 1.5 }}>{error}</div>
+                  <div style={{ padding: '12px 16px', borderRadius: 10, background: 'var(--red-bg)', border: '1px solid rgba(239,68,68,0.25)', lineHeight: 1.7 }}>
+                    {error.split('\n').map((line, i) => (
+                      <div key={i} style={{ fontSize: 14, color: 'var(--red)', display: 'flex', alignItems: 'flex-start', gap: 7 }}>
+                        <span style={{ flexShrink: 0, marginTop: 2 }}>⚠</span>
+                        <span>{line}</span>
+                      </div>
+                    ))}
+                  </div>
                 )}
                 <button type="submit" className="btn btn-primary" disabled={loading} style={{ width: '100%', padding: '13px', fontSize: 16, marginTop: 4, opacity: loading ? 0.7 : 1 }}>
                   {loading
