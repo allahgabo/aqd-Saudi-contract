@@ -147,7 +147,12 @@ export const contractsApi = {
     api.post<{answer:string}>(`/contracts/${contractId}/chat/`, {question, history}),
   compare:        (id1: string, id2: string) =>
     api.post<{comparison:string}>('/contracts/compare/', {contract1: id1, contract2: id2}),
-  downloadReport: (id: string) => window.open(`${backendBase}/reports/${id}/download/`, '_blank'),
+  downloadReport: (id: string) => {
+    // Pass JWT token as query param so the download works in a new tab
+    const token = localStorage.getItem('access_token');
+    const url = `${backendBase}/reports/${id}/download/${token ? `?token=${token}` : ''}`;
+    window.open(url, '_blank');
+  },
 };
 
 export const adminApi = {

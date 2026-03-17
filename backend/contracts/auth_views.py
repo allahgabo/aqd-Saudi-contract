@@ -80,3 +80,24 @@ class UpgradePlanView(APIView):
         profile.save(update_fields=['plan'])
         from .serializers import UserSerializer
         return Response({'message': f'Upgraded to {plan.display_name}', 'user': UserSerializer(request.user).data})
+
+
+class ChangePasswordView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        old_password = request.data.get('old_password', '')
+        new_password = request.data.get('new_password', '')
+
+        if not old_password or not new_password:
+            return Response({'error': 'Both old and new passwords are required'}, status=400)
+
+        if len(new_password) < 8:
+            return Response({'error': 'New password must be at least 8 characters'}, status=400)
+
+        if not request.user.check_password(old_password):
+            return Response({'error': 'Current password is incorrect'}, status=400)
+
+        request.user.set_password(new_password)
+        request.user.save()
+        return Response({'message': 'Password changed successfully'})

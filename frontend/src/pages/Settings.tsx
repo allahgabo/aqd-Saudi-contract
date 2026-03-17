@@ -207,6 +207,9 @@ export default function Settings() {
         </div>
       </div>
 
+      {/* Change Password */}
+      <ChangePasswordSection lang={lang} isRTL={isRTL} />
+
       {/* Danger zone */}
       <div className="card" style={{ border: '1px solid rgba(239,68,68,0.2)', background: 'rgba(239,68,68,0.02)' }}>
         <div style={{ fontSize: 9.5, fontWeight: 700, color: 'var(--red)', letterSpacing: '1.5px', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -219,6 +222,67 @@ export default function Settings() {
           <LogOut size={14} /> Sign Out of All Devices
         </button>
       </div>
+    </div>
+  );
+}
+
+
+function ChangePasswordSection({ lang, isRTL }: { lang: string; isRTL: boolean }) {
+  const [open, setOpen]           = useState(false);
+  const [oldPass, setOldPass]     = useState('');
+  const [newPass, setNewPass]     = useState('');
+  const [confirm, setConfirm]     = useState('');
+  const [saving, setSaving]       = useState(false);
+
+  const handleChange = async () => {
+    if (newPass !== confirm) { toast.error(lang === 'ar' ? 'كلمتا المرور غير متطابقتين' : 'Passwords do not match'); return; }
+    if (newPass.length < 8)  { toast.error(lang === 'ar' ? 'كلمة المرور قصيرة جداً (8 أحرف على الأقل)' : 'Password too short (min 8 chars)'); return; }
+    setSaving(true);
+    try {
+      const { api } = await import('../api');
+      await api.post('/auth/change-password/', { old_password: oldPass, new_password: newPass });
+      toast.success(lang === 'ar' ? 'تم تغيير كلمة المرور ✅' : 'Password changed ✅');
+      setOpen(false); setOldPass(''); setNewPass(''); setConfirm('');
+    } catch (err: any) {
+      const msg = err.response?.data?.error || (lang === 'ar' ? 'فشل تغيير كلمة المرور' : 'Failed to change password');
+      toast.error(msg);
+    } finally { setSaving(false); }
+  };
+
+  const labels = {
+    title:      lang === 'ar' ? 'تغيير كلمة المرور' : 'CHANGE PASSWORD',
+    current:    lang === 'ar' ? 'كلمة المرور الحالية' : 'CURRENT PASSWORD',
+    new:        lang === 'ar' ? 'كلمة المرور الجديدة' : 'NEW PASSWORD',
+    confirm:    lang === 'ar' ? 'تأكيد كلمة المرور الجديدة' : 'CONFIRM NEW PASSWORD',
+    update:     lang === 'ar' ? 'تحديث كلمة المرور' : 'Update Password',
+    updating:   lang === 'ar' ? 'جاري التحديث…' : 'Updating…',
+    expand:     lang === 'ar' ? 'تغيير كلمة المرور' : 'Change Password',
+  };
+
+  return (
+    <div className="card" style={{ marginBottom: 14 }}>
+      <div style={{ fontSize: 9.5, fontWeight: 700, color: 'var(--text-dim)', letterSpacing: isRTL ? 0 : '1.5px', marginBottom: open ? 16 : 0, display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }} onClick={() => setOpen(o => !o)}>
+        <span>{labels.title}</span>
+        <span style={{ fontSize: 12, color: 'var(--primary)', fontWeight: 600 }}>{open ? '▲' : '▼'}</span>
+      </div>
+      {open && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          {[
+            { key: 'old',     label: labels.current, val: oldPass, set: setOldPass },
+            { key: 'new',     label: labels.new,     val: newPass, set: setNewPass },
+            { key: 'confirm', label: labels.confirm,  val: confirm, set: setConfirm },
+          ].map(({ key, label, val, set }) => (
+            <div key={key}>
+              <label style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5 }}>{label}</label>
+              <input className="input" type="password" value={val} onChange={e => set(e.target.value)} placeholder="••••••••" style={{ fontSize: 15 }} />
+            </div>
+          ))}
+          <button onClick={handleChange} disabled={saving || !oldPass || !newPass || !confirm}
+            className="btn btn-primary" style={{ alignSelf: 'flex-start', padding: '10px 20px', opacity: (!oldPass || !newPass || !confirm) ? 0.5 : 1 }}>
+            {saving ? labels.updating : labels.update}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

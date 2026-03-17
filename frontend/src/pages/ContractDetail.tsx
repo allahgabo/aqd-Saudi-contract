@@ -226,14 +226,25 @@ export default function ContractDetail() {
   const [error, setError]       = useState<string | null>(null);
   const [tab, setTab]           = useState<'overview'|'clauses'|'missing'|'questions'|'chat'>('overview');
   const [sharing, setSharing]   = useState(false);
+  const [isShared, setIsShared] = useState(false);
+
+  useEffect(() => {
+    if (contract) setIsShared(contract.is_shared);
+  }, [contract]);
 
   const handleShare = async () => {
     setSharing(true);
     try {
       const res = await contractsApi.share(contract!.id);
-      const url = `${window.location.origin}/shared/${res.data.share_token}`;
-      await navigator.clipboard.writeText(url);
-      toast.success(t(T.detail.shareCopied, lang));
+      const nowShared = res.data.share_token !== undefined;
+      setIsShared(!isShared);
+      if (!isShared) {
+        const url = `${window.location.origin}/shared/${res.data.share_token}`;
+        await navigator.clipboard.writeText(url);
+        toast.success(lang === 'ar' ? 'تم نسخ رابط المشاركة! 🔗' : 'Share link copied! 🔗');
+      } else {
+        toast.success(lang === 'ar' ? 'تم إلغاء المشاركة' : 'Sharing disabled');
+      }
     } catch {
       toast.error(lang === 'ar' ? 'فشل إنشاء رابط المشاركة' : 'Failed to create share link');
     } finally { setSharing(false); }
@@ -316,8 +327,13 @@ export default function ContractDetail() {
           <ArrowLeft size={15} style={{ transform: isRTL ? 'rotate(180deg)' : 'none' }} /> {t(T.back, lang)}
         </button>
         <div style={{ display: 'flex', gap: 8, flexDirection: isRTL ? 'row-reverse' : 'row' }}>
-          <button onClick={handleShare} disabled={sharing} className="btn btn-ghost" style={{ padding: '9px 14px', fontSize: 15 }}>
-            <Share2 size={13} /> {sharing ? (lang === 'ar' ? 'جاري النسخ…' : 'Copying…') : t(T.share, lang)}
+          <button onClick={handleShare} disabled={sharing} className={isShared ? "btn btn-primary" : "btn btn-ghost"} style={{ padding: '9px 14px', fontSize: 15 }}>
+            <Share2 size={13} />
+            {sharing
+              ? (lang === 'ar' ? 'جاري التحديث…' : 'Updating…')
+              : isShared
+                ? (lang === 'ar' ? 'مشارك ✓' : 'Shared ✓')
+                : t(T.share, lang)}
           </button>
           <button onClick={() => contractsApi.downloadReport(contract.id)} className="btn btn-gold" style={{ padding: '9px 18px', fontSize: 15 }}>
             <Download size={14} /> {t(T.detail.downloadPDF, lang)}

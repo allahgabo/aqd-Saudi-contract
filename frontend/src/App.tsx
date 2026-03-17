@@ -87,6 +87,7 @@ function AppRoutes() {
               <Route path="/compare"       element={<Compare />} />
               <Route path="/pricing"       element={<Pricing />} />
               <Route path="/settings"      element={<Settings />} />
+              <Route path="/profile"       element={<Navigate to="/settings" replace />} />
               <Route path="/admin"         element={<RequireAdmin><AdminDashboard /></RequireAdmin>} />
               <Route path="/admin/users"   element={<RequireAdmin><AdminDashboard /></RequireAdmin>} />
               <Route path="*"              element={<Navigate to="/" replace />} />

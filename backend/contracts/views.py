@@ -297,23 +297,26 @@ class AdminUserDetailView(AdminRequiredMixin, APIView):
 
 class AdminStatsView(AdminRequiredMixin, APIView):
     def get(self, request):
-        self.check_admin(request)
+        self.check_admin(request)  # raises PermissionDenied if not admin
+        from django.utils import timezone
         from django.db.models import Count
-        total_users     = User.objects.count()
-        active_users    = User.objects.filter(is_active=True).count()
-        total_contracts = Contract.objects.count()
-        completed       = Contract.objects.filter(status='completed').count()
-        avg_score       = Contract.objects.filter(status='completed').aggregate(a=Avg('compliance_score'))['a'] or 0
+        today = timezone.now().date()
 
-        plan_dist = UserProfile.objects.values('plan__name').annotate(c=Count('id'))
+        total_users      = User.objects.count()
+        pro_users        = UserProfile.objects.filter(plan__name='pro').count()
+        enterprise_users = UserProfile.objects.filter(plan__name='enterprise').count()
+        total_contracts  = Contract.objects.count()
+        contracts_today  = Contract.objects.filter(created_at__date=today).count()
+        avg = Contract.objects.filter(status='completed').aggregate(a=Avg('compliance_score'))['a'] or 0
 
         return Response({
-            'total_users':      total_users,
-            'active_users':     active_users,
-            'total_contracts':  total_contracts,
-            'completed_analyses': completed,
-            'avg_compliance_score': round(avg_score, 1),
-            'plan_distribution': list(plan_dist),
+            'total_users':       total_users,
+            'pro_users':         pro_users,
+            'enterprise_users':  enterprise_users,
+            'free_users':        total_users - pro_users - enterprise_users,
+            'total_contracts':   total_contracts,
+            'contracts_today':   contracts_today,
+            'avg_compliance':    round(avg, 1),
         })
 
 
@@ -397,76 +400,23 @@ class ContractCompareView(APIView):
 
 
 # ── Admin endpoints ──────────────────────────────────────────────────────────
-class AdminRequiredMixin:
+class AdminUserPlanView(APIView):
+    """Admin: change a user's plan."""
     permission_classes = [IsAuthenticated]
 
-    def check_admin(self, request):
-        from .models import UserProfile
-        try:
-            return request.user.profile.is_admin
-        except Exception:
-            return request.user.is_staff or request.user.is_superuser
-
-
-class AdminUsersView(AdminRequiredMixin, APIView):
-    def get(self, request):
-        if not self.check_admin(request):
-            return Response({'error': 'Admin required'}, status=403)
-        from django.contrib.auth.models import User
-        from .serializers import UserSerializer
-        users = User.objects.select_related('profile__plan').prefetch_related('contracts').order_by('-date_joined')
-        data = []
-        for u in users:
-            profile = getattr(u, 'profile', None)
-            from .serializers import UserProfileSerializer
-            data.append({
-                'id': u.id, 'username': u.username, 'email': u.email,
-                'first_name': u.first_name, 'last_name': u.last_name,
-                'date_joined': u.date_joined.isoformat(), 'is_active': u.is_active,
-                'profile': UserProfileSerializer(profile).data if profile else None,
-                'contract_count': u.contracts.count(),
-            })
-        return Response(data)
-
-
-class AdminUserPlanView(AdminRequiredMixin, APIView):
     def post(self, request, user_id):
-        if not self.check_admin(request):
-            return Response({'error': 'Admin required'}, status=403)
-        from django.contrib.auth.models import User
         from .models import Plan, UserProfile
-        u = get_object_or_404(User, id=user_id)
-        plan_name = request.data.get('plan', '')
+        from django.contrib.auth.models import User as DjangoUser
+        # Only admins
+        profile = getattr(request.user, 'profile', None)
+        if not (profile and profile.is_admin) and not request.user.is_staff:
+            return Response({'error': 'Admin required'}, status=403)
+
+        target = get_object_or_404(DjangoUser, id=user_id)
+        plan_name = request.data.get('plan', '').strip()
         plan = get_object_or_404(Plan, name=plan_name)
-        profile, _ = UserProfile.objects.get_or_create(user=u)
-        profile.plan = plan
-        profile.save(update_fields=['plan'])
+
+        user_profile, _ = UserProfile.objects.get_or_create(user=target)
+        user_profile.plan = plan
+        user_profile.save(update_fields=['plan'])
         return Response({'message': f'Plan updated to {plan.display_name}'})
-
-
-class AdminStatsView(AdminRequiredMixin, APIView):
-    def get(self, request):
-        if not self.check_admin(request):
-            return Response({'error': 'Admin required'}, status=403)
-        from django.contrib.auth.models import User
-        from .models import Plan, UserProfile
-        from django.utils import timezone
-        from django.db.models import Avg, Count
-        today = timezone.now().date()
-
-        total_users = User.objects.count()
-        pro_users = UserProfile.objects.filter(plan__name='pro').count()
-        enterprise_users = UserProfile.objects.filter(plan__name='enterprise').count()
-        total_contracts = Contract.objects.count()
-        contracts_today = Contract.objects.filter(created_at__date=today).count()
-        avg = Contract.objects.filter(status='completed').aggregate(a=Avg('compliance_score'))['a'] or 0
-
-        return Response({
-            'total_users': total_users,
-            'pro_users': pro_users,
-            'enterprise_users': enterprise_users,
-            'free_users': total_users - pro_users - enterprise_users,
-            'total_contracts': total_contracts,
-            'contracts_today': contracts_today,
-            'avg_compliance': round(avg, 1),
-        })

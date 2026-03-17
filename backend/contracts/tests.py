@@ -195,3 +195,111 @@ class ContractModelTests(TestCase):
         profile.contracts_this_month = 3
         profile.save()
         self.assertFalse(profile.can_analyze())
+
+
+@override_settings(USE_SQLITE=True)
+class PasswordChangeTests(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.user = make_user('pwtest')
+        res = self.client.post('/api/auth/token/', {'username': 'pwtest', 'password': 'testpass123'}, format='json')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {res.data["access"]}')
+
+    def test_change_password_success(self):
+        res = self.client.post('/api/auth/change-password/', {
+            'old_password': 'testpass123',
+            'new_password': 'NewPass456!'
+        }, format='json')
+        self.assertEqual(res.status_code, 200)
+        self.assertIn('message', res.data)
+
+    def test_change_password_wrong_old(self):
+        res = self.client.post('/api/auth/change-password/', {
+            'old_password': 'wrongpassword',
+            'new_password': 'NewPass456!'
+        }, format='json')
+        self.assertEqual(res.status_code, 400)
+
+    def test_change_password_too_short(self):
+        res = self.client.post('/api/auth/change-password/', {
+            'old_password': 'testpass123',
+            'new_password': 'short'
+        }, format='json')
+        self.assertEqual(res.status_code, 400)
+
+    def test_change_password_unauthenticated(self):
+        unauth = APIClient()
+        res = unauth.post('/api/auth/change-password/', {
+            'old_password': 'testpass123',
+            'new_password': 'NewPass456!'
+        }, format='json')
+        self.assertEqual(res.status_code, 401)
+
+
+@override_settings(USE_SQLITE=True)
+class AdminTests(TestCase):
+    def setUp(self):
+        from contracts.models import Plan, UserProfile
+        self.client = APIClient()
+        # Create admin user
+        self.admin = make_user('admintest')
+        plan, _ = Plan.objects.get_or_create(name='enterprise', defaults={
+            'display_name': 'Enterprise', 'monthly_limit': -1, 'price_sar': 299, 'features': []
+        })
+        profile = self.admin.profile
+        profile.is_admin = True
+        profile.plan = plan
+        profile.save()
+        res = self.client.post('/api/auth/token/', {'username': 'admintest', 'password': 'testpass123'}, format='json')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {res.data["access"]}')
+        # Create a regular user
+        self.regular = make_user('regulartest')
+
+    def test_admin_can_list_users(self):
+        res = self.client.get('/api/admin/users/')
+        self.assertEqual(res.status_code, 200)
+        self.assertIsInstance(res.data, list)
+
+    def test_admin_stats(self):
+        res = self.client.get('/api/admin/stats/')
+        self.assertEqual(res.status_code, 200)
+        self.assertIn('total_users', res.data)
+        self.assertIn('pro_users', res.data)
+        self.assertIn('contracts_today', res.data)
+        self.assertIn('avg_compliance', res.data)
+
+    def test_non_admin_cannot_access_admin_api(self):
+        regular_client = APIClient()
+        res = regular_client.post('/api/auth/token/', {'username': 'regulartest', 'password': 'testpass123'}, format='json')
+        regular_client.credentials(HTTP_AUTHORIZATION=f'Bearer {res.data["access"]}')
+        res = regular_client.get('/api/admin/users/')
+        self.assertIn(res.status_code, [403, 401])
+
+    def test_admin_can_change_user_plan(self):
+        from contracts.models import Plan
+        Plan.objects.get_or_create(name='pro', defaults={
+            'display_name': 'Pro', 'monthly_limit': 30, 'price_sar': 99, 'features': []
+        })
+        res = self.client.post(f'/api/admin/users/{self.regular.id}/plan/', {'plan': 'pro'}, format='json')
+        self.assertEqual(res.status_code, 200)
+
+
+@override_settings(USE_SQLITE=True)
+class UpgradePlanTests(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.user = make_user('upgradetest')
+        res = self.client.post('/api/auth/token/', {'username': 'upgradetest', 'password': 'testpass123'}, format='json')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {res.data["access"]}')
+
+    def test_upgrade_to_pro(self):
+        from contracts.models import Plan
+        Plan.objects.get_or_create(name='pro', defaults={
+            'display_name': 'Pro', 'monthly_limit': 30, 'price_sar': 99, 'features': []
+        })
+        res = self.client.post('/api/auth/upgrade/', {'plan': 'pro'}, format='json')
+        self.assertEqual(res.status_code, 200)
+
+    def test_upgrade_invalid_plan(self):
+        res = self.client.post('/api/auth/upgrade/', {'plan': 'nonexistent'}, format='json')
+        self.assertEqual(res.status_code, 400)
