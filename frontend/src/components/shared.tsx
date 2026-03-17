@@ -7,7 +7,7 @@ export function PageSpinner({ label = 'Loading…' }: { label?: string }) {
         <div style={{ position: 'absolute', inset: 0, border: '3px solid rgba(59,130,246,0.12)', borderRadius: '50%' }} />
         <div style={{ position: 'absolute', inset: 0, border: '3px solid transparent', borderTopColor: 'var(--primary)', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
       </div>
-      <span style={{ fontSize: 13, color: 'var(--text-muted)', fontWeight: 500 }}>{label}</span>
+      <span style={{ fontSize: 15, color: 'var(--text-muted)', fontWeight: 500 }}>{label}</span>
     </div>
   );
 }
@@ -17,7 +17,7 @@ export function EmptyState({ icon, title, message, action }: { icon: React.React
     <div style={{ padding: '60px 32px', textAlign: 'center', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius)' }}>
       <div style={{ marginBottom: 16, opacity: 0.4 }}>{icon}</div>
       <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 8 }}>{title}</div>
-      <p style={{ color: 'var(--text-muted)', fontSize: 13, maxWidth: 360, margin: '0 auto 20px' }}>{message}</p>
+      <p style={{ color: 'var(--text-muted)', fontSize: 15, maxWidth: 360, margin: '0 auto 20px' }}>{message}</p>
       {action}
     </div>
   );
@@ -54,7 +54,7 @@ export function ScoreBar({ score, height = 6, showLabel = true }: { score: numbe
           transition: 'width 0.6s cubic-bezier(.16,1,.3,1)',
         }} />
       </div>
-      {showLabel && <span style={{ fontSize: 11, fontWeight: 700, color, minWidth: 34, textAlign: 'right' }}>{score}%</span>}
+      {showLabel && <span style={{ fontSize: 14, fontWeight: 700, color, minWidth: 34, textAlign: 'right' }}>{score}%</span>}
     </div>
   );
 }

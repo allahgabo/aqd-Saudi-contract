@@ -17,11 +17,11 @@ function UsageMeter({ remaining, limit }: { remaining: number; limit: number }) 
     <div style={{ padding: '10px 14px', background: 'rgba(234,179,8,0.06)', border: '1px solid rgba(234,179,8,0.15)', borderRadius: 10, marginBottom: 8 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
         <Crown size={11} color="var(--gold)" />
-        <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--gold)', letterSpacing: lang === 'en' ? '0.5px' : 0 }}>
+        <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--gold)', letterSpacing: lang === 'en' ? '0.5px' : 0 }}>
           {t(T.misc.unlimited, lang).toUpperCase()}
         </span>
       </div>
-      <span style={{ fontSize: 10, color: 'var(--text-dim)' }}>Enterprise</span>
+      <span style={{ fontSize: 13, color: 'var(--text-dim)' }}>Enterprise</span>
     </div>
   );
   const used = limit - remaining;
@@ -30,10 +30,10 @@ function UsageMeter({ remaining, limit }: { remaining: number; limit: number }) 
   return (
     <div style={{ padding: '10px 14px', background: 'var(--bg-elevated)', border: '1px solid var(--border)', borderRadius: 10, marginBottom: 8 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-        <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-dim)' }}>
+        <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-dim)' }}>
           {lang === 'ar' ? 'التحليلات هذا الشهر' : 'ANALYSES THIS MONTH'}
         </span>
-        <span style={{ fontSize: 11, fontWeight: 800, color }}>{remaining}/{limit}</span>
+        <span style={{ fontSize: 14, fontWeight: 800, color }}>{remaining}/{limit}</span>
       </div>
       <div style={{ height: 4, background: 'var(--border)', borderRadius: 99, overflow: 'hidden', marginBottom: 5 }}>
         <div style={{ height: '100%', borderRadius: 99, width: `${pct}%`, background: color, transition: 'width 0.5s ease', boxShadow: `0 0 6px ${color}60` }} />
@@ -75,8 +75,8 @@ function NavItem({ to, icon: Icon, label, sub, onClick }: any) {
           <Icon size={14} color={active ? 'var(--primary)' : 'var(--text-dim)'} />
         </div>
         <div style={{ flex: 1, minWidth: 0, textAlign: isRTL ? 'right' : 'left' }}>
-          <div style={{ fontSize: 13, fontWeight: active ? 700 : 500, color: active ? 'var(--text)' : 'var(--text-muted)' }}>{label}</div>
-          <div style={{ fontSize: 9, color: 'var(--text-dim)', marginTop: 1 }}>{sub}</div>
+          <div style={{ fontSize: 15, fontWeight: active ? 700 : 500, color: active ? 'var(--text)' : 'var(--text-muted)' }}>{label}</div>
+          <div style={{ fontSize: 12, color: 'var(--text-dim)', marginTop: 1 }}>{sub}</div>
         </div>
         {active && <ChevronRight size={11} color="var(--primary)" style={{ transform: isRTL ? 'rotate(180deg)' : 'none' }} />}
       </div>
@@ -93,8 +93,8 @@ function LangToggle() {
         display: 'flex', alignItems: 'center', gap: 6, width: '100%',
         padding: '8px 12px', marginBottom: 6,
         background: 'rgba(59,130,246,0.06)', border: '1px solid rgba(59,130,246,0.15)',
-        borderRadius: 8, cursor: 'pointer', fontFamily: 'Outfit, Cairo, sans-serif',
-        color: 'var(--primary)', fontSize: 12, fontWeight: 600,
+        borderRadius: 8, cursor: 'pointer', fontFamily: 'Cairo, sans-serif',
+        color: 'var(--primary)', fontSize: 14, fontWeight: 600,
         transition: 'all 0.15s', flexDirection: isRTL ? 'row-reverse' : 'row',
       }}
       onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'rgba(59,130,246,0.12)'}
@@ -174,8 +174,8 @@ function SidebarContent({ onClose }: { onClose?: () => void }) {
                 <Zap size={13} color="var(--gold)" />
               </div>
               <div style={{ textAlign: isRTL ? 'right' : 'left' }}>
-                <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold)' }}>{t(T.misc.upgradeToPro, lang)}</div>
-                <div style={{ fontSize: 9, color: 'var(--text-dim)' }}>{t(T.misc.upgradeSub, lang)}</div>
+                <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--gold)' }}>{t(T.misc.upgradeToPro, lang)}</div>
+                <div style={{ fontSize: 12, color: 'var(--text-dim)' }}>{t(T.misc.upgradeSub, lang)}</div>
               </div>
             </Link>
           )}
@@ -192,21 +192,21 @@ function SidebarContent({ onClose }: { onClose?: () => void }) {
                 onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.04)'}
                 onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
               >
-                <div style={{ width: 32, height: 32, borderRadius: '50%', flexShrink: 0, background: `linear-gradient(135deg, ${user.profile?.avatar_color || 'var(--primary)'}, var(--accent))`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 800, color: 'white' }}>
+                <div style={{ width: 32, height: 32, borderRadius: '50%', flexShrink: 0, background: `linear-gradient(135deg, ${user.profile?.avatar_color || 'var(--primary)'}, var(--accent))`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, fontWeight: 800, color: 'white' }}>
                   {(user.first_name?.[0] || user.username[0]).toUpperCase()}
                 </div>
                 <div style={{ flex: 1, minWidth: 0, textAlign: isRTL ? 'right' : 'left' }}>
-                  <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {user.first_name ? `${user.first_name} ${user.last_name}` : user.username}
                   </div>
-                  <div style={{ fontSize: 9, color: 'var(--text-dim)', marginTop: 2 }}>
+                  <div style={{ fontSize: 12, color: 'var(--text-dim)', marginTop: 2 }}>
                     {planName === 'free' ? (lang === 'ar' ? 'الخطة المجانية' : 'Free Plan') : planName === 'pro' ? 'Pro' : 'Enterprise'}
                   </div>
                 </div>
                 <Settings size={12} color="var(--text-dim)" />
               </div>
             </Link>
-            <button onClick={() => { logout(); navigate('/login'); onClose?.(); }} style={{ width: '100%', padding: '8px 12px', background: 'transparent', border: '1px solid rgba(239,68,68,0.15)', borderRadius: 8, color: 'var(--red)', cursor: 'pointer', fontSize: 11, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Outfit, Cairo, sans-serif', transition: 'all 0.15s' }}
+            <button onClick={() => { logout(); navigate('/login'); onClose?.(); }} style={{ width: '100%', padding: '8px 12px', background: 'transparent', border: '1px solid rgba(239,68,68,0.15)', borderRadius: 8, color: 'var(--red)', cursor: 'pointer', fontSize: 14, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Cairo, sans-serif', transition: 'all 0.15s' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--red-bg)'}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
             >
@@ -215,8 +215,8 @@ function SidebarContent({ onClose }: { onClose?: () => void }) {
           </>
         ) : (
           <div style={{ display: 'flex', gap: 6 }}>
-            <Link to="/login" onClick={onClose} className="btn btn-ghost" style={{ flex: 1, fontSize: 11, padding: '8px', textDecoration: 'none', justifyContent: 'center' }}>{t(T.signIn, lang)}</Link>
-            <Link to="/register" onClick={onClose} className="btn btn-primary" style={{ flex: 1, fontSize: 11, padding: '8px', textDecoration: 'none', justifyContent: 'center' }}>{t(T.signUp, lang)}</Link>
+            <Link to="/login" onClick={onClose} className="btn btn-ghost" style={{ flex: 1, fontSize: 14, padding: '8px', textDecoration: 'none', justifyContent: 'center' }}>{t(T.signIn, lang)}</Link>
+            <Link to="/register" onClick={onClose} className="btn btn-primary" style={{ flex: 1, fontSize: 14, padding: '8px', textDecoration: 'none', justifyContent: 'center' }}>{t(T.signUp, lang)}</Link>
           </div>
         )}
       </div>
@@ -260,10 +260,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <span style={{ fontWeight: 900, fontSize: 15 }}>AQD <span style={{ color: 'var(--gold)' }}>·</span> <span style={{ fontFamily: 'Playfair Display, Cairo, serif' }}>عقد</span></span>
           </div>
           <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-            <button onClick={() => {}} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)', fontSize: 11, fontWeight: 600, fontFamily: 'Cairo, Outfit, sans-serif' }} />
+            <button onClick={() => {}} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--primary)', fontSize: 14, fontWeight: 600, fontFamily: 'Cairo, sans-serif' }} />
             <Link to="/settings" style={{ textDecoration: 'none' }}>
               {user ? (
-                <div style={{ width: 30, height: 30, borderRadius: '50%', background: `linear-gradient(135deg, ${user.profile?.avatar_color || 'var(--primary)'}, var(--accent))`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 800, color: 'white' }}>
+                <div style={{ width: 30, height: 30, borderRadius: '50%', background: `linear-gradient(135deg, ${user.profile?.avatar_color || 'var(--primary)'}, var(--accent))`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, fontWeight: 800, color: 'white' }}>
                   {(user.first_name?.[0] || user.username[0]).toUpperCase()}
                 </div>
               ) : null}

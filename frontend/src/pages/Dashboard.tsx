@@ -24,8 +24,8 @@ function StatCard({ label, value, sub, color, icon: Icon }: any) {
         <Icon size={18} color={color} />
       </div>
       <div style={{ fontSize: 32, fontWeight: 900, color: 'var(--text)', lineHeight: 1, marginBottom: 4 }}>{value}</div>
-      <div style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 500 }}>{label}</div>
-      {sub && <div style={{ fontSize: 10, color: 'var(--text-dim)', marginTop: 3 }}>{sub}</div>}
+      <div style={{ fontSize: 14, color: 'var(--text-muted)', fontWeight: 500 }}>{label}</div>
+      {sub && <div style={{ fontSize: 13, color: 'var(--text-dim)', marginTop: 3 }}>{sub}</div>}
     </div>
   );
 }
@@ -40,7 +40,7 @@ function ScoreRing({ score }: { score: number }) {
       <circle cx={58} cy={58} r={r} fill="none" stroke={color} strokeWidth={10}
         strokeDasharray={`${dash} ${circ - dash}`} strokeDashoffset={circ / 4}
         strokeLinecap="round" style={{ filter: `drop-shadow(0 0 8px ${color})`, transition: 'stroke-dasharray 1s ease' }} />
-      <text x={58} y={62} textAnchor="middle" fill={color} fontSize={22} fontWeight={900} fontFamily="Outfit, Cairo">{score}%</text>
+      <text x={58} y={62} textAnchor="middle" fill={color} fontSize={22} fontWeight={900} fontFamily="Cairo">{score}%</text>
     </svg>
   );
 }
@@ -68,7 +68,7 @@ export default function Dashboard() {
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '70vh' }}>
       <div style={{ textAlign: 'center' }}>
         <div style={{ width: 44, height: 44, border: '3px solid var(--primary)', borderTopColor: 'transparent', borderRadius: '50%', margin: '0 auto 14px', animation: 'spin 0.8s linear infinite' }} />
-        <div style={{ color: 'var(--text-muted)', fontSize: 13 }}>{t(T.loading, lang)}</div>
+        <div style={{ color: 'var(--text-muted)', fontSize: 15 }}>{t(T.loading, lang)}</div>
       </div>
     </div>
   );
@@ -82,9 +82,9 @@ export default function Dashboard() {
             <h1 style={{ fontSize: 30, fontWeight: 900, letterSpacing: isRTL ? 0 : '-0.5px', marginBottom: 6 }}>
               {t(T.dashboard.title, lang)}{user ? `, ${user.first_name || user.username}` : ''} 👋
             </h1>
-            <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>{t(T.dashboard.subtitle, lang)}</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: 16 }}>{t(T.dashboard.subtitle, lang)}</p>
           </div>
-          <Link to="/upload" className="btn btn-gold" style={{ padding: '12px 22px', fontSize: 13, textDecoration: 'none' }}>
+          <Link to="/upload" className="btn btn-gold" style={{ padding: '12px 22px', fontSize: 15, textDecoration: 'none' }}>
             <Upload size={15} /> {t(T.nav.analyze, lang)}
           </Link>
         </div>
@@ -104,9 +104,9 @@ export default function Dashboard() {
         <div className="card animate-fade-up" style={{ display: 'flex', gap: 24, alignItems: 'center', animationDelay: '100ms', flexDirection: isRTL ? 'row-reverse' : 'row' }}>
           <ScoreRing score={Math.round(stats?.average_compliance_score ?? 0)} />
           <div style={{ textAlign: isRTL ? 'right' : 'left' }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-dim)', marginBottom: 8 }}>{t(T.dashboard.avgCompliance, lang).toUpperCase()}</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-dim)', marginBottom: 8 }}>{t(T.dashboard.avgCompliance, lang).toUpperCase()}</div>
             <div style={{ fontSize: 36, fontWeight: 900, color: 'var(--text)', lineHeight: 1, marginBottom: 4 }}>{Math.round(stats?.average_compliance_score ?? 0)}%</div>
-            <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 16 }}>
+            <div style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 16 }}>
               {t(T.dashboard.basedOn, lang)} {stats?.total_contracts ?? 0} {t(T.dashboard.contracts, lang)}
             </div>
             <div style={{ display: 'flex', gap: 8 }}>
@@ -117,7 +117,7 @@ export default function Dashboard() {
               ].map(({ n, color, label }) => (
                 <div key={label} style={{ textAlign: 'center', flex: 1, padding: '8px 6px', borderRadius: 8, background: `${color}08`, border: `1px solid ${color}20` }}>
                   <div style={{ fontSize: 18, fontWeight: 800, color }}>{n}</div>
-                  <div style={{ fontSize: 9, color: 'var(--text-dim)', fontWeight: 600, marginTop: 2 }}>{label}</div>
+                  <div style={{ fontSize: 12, color: 'var(--text-dim)', fontWeight: 600, marginTop: 2 }}>{label}</div>
                 </div>
               ))}
             </div>
@@ -126,7 +126,7 @@ export default function Dashboard() {
 
         {/* Quick actions */}
         <div className="card animate-fade-up" style={{ animationDelay: '150ms' }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-dim)', letterSpacing: isRTL ? 0 : '1px', marginBottom: 16, textAlign: isRTL ? 'right' : 'left' }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-dim)', letterSpacing: isRTL ? 0 : '1px', marginBottom: 16, textAlign: isRTL ? 'right' : 'left' }}>
             {t(T.dashboard.quickActions, lang).toUpperCase()}
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -144,8 +144,8 @@ export default function Dashboard() {
                     <Icon size={15} color={color} />
                   </div>
                   <div style={{ flex: 1, textAlign: isRTL ? 'right' : 'left' }}>
-                    <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>{label}</div>
-                    <div style={{ fontSize: 10, color: 'var(--text-dim)' }}>{sub}</div>
+                    <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--text)' }}>{label}</div>
+                    <div style={{ fontSize: 13, color: 'var(--text-dim)' }}>{sub}</div>
                   </div>
                   <ArrowRight size={13} color="var(--text-dim)" style={{ transform: isRTL ? 'rotate(180deg)' : 'none' }} />
                 </div>
@@ -160,11 +160,11 @@ export default function Dashboard() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, flexDirection: isRTL ? 'row-reverse' : 'row' }}>
           <div style={{ textAlign: isRTL ? 'right' : 'left' }}>
             <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 2 }}>{t(T.dashboard.recentAnalyses, lang)}</div>
-            <div style={{ fontSize: 11, color: 'var(--text-dim)' }}>{t(T.dashboard.latestReviews, lang)}</div>
+            <div style={{ fontSize: 14, color: 'var(--text-dim)' }}>{t(T.dashboard.latestReviews, lang)}</div>
           </div>
           <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexDirection: isRTL ? 'row-reverse' : 'row' }}>
             <button onClick={load} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-dim)', padding: 4 }}><RefreshCw size={13} /></button>
-            <Link to="/history" style={{ fontSize: 12, color: 'var(--primary)', textDecoration: 'none', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
+            <Link to="/history" style={{ fontSize: 14, color: 'var(--primary)', textDecoration: 'none', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
               {t(T.viewAll, lang)} {isRTL ? null : <ArrowRight size={11} />}
             </Link>
           </div>
@@ -176,8 +176,8 @@ export default function Dashboard() {
               <Shield size={24} color="var(--primary)" />
             </div>
             <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 6 }}>{t(T.dashboard.noContracts, lang)}</div>
-            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 20 }}>{t(T.dashboard.uploadFirst, lang)}</p>
-            <Link to="/upload" className="btn btn-primary" style={{ fontSize: 13, textDecoration: 'none', display: 'inline-flex' }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20 }}>{t(T.dashboard.uploadFirst, lang)}</p>
+            <Link to="/upload" className="btn btn-primary" style={{ fontSize: 15, textDecoration: 'none', display: 'inline-flex' }}>
               <Upload size={14} /> {t(T.dashboard.analyzeFirst, lang)}
             </Link>
           </div>
@@ -194,16 +194,16 @@ export default function Dashboard() {
                     <FileText size={16} color={rm.color} />
                   </div>
                   <div style={{ flex: 1, minWidth: 0, textAlign: isRTL ? 'right' : 'left' }}>
-                    <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginBottom: 3 }}>{c.file_name}</div>
+                    <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginBottom: 3 }}>{c.file_name}</div>
                     <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexDirection: isRTL ? 'row-reverse' : 'row' }}>
-                      {c.employer_name && <span style={{ fontSize: 10, color: 'var(--text-dim)' }}>🏢 {c.employer_name}</span>}
-                      <span style={{ fontSize: 10, color: 'var(--text-dim)', display: 'flex', alignItems: 'center', gap: 3 }}><Clock size={9} /> {timeAgo(c.created_at)}</span>
+                      {c.employer_name && <span style={{ fontSize: 13, color: 'var(--text-dim)' }}>🏢 {c.employer_name}</span>}
+                      <span style={{ fontSize: 13, color: 'var(--text-dim)', display: 'flex', alignItems: 'center', gap: 3 }}><Clock size={9} /> {timeAgo(c.created_at)}</span>
                     </div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0, flexDirection: isRTL ? 'row-reverse' : 'row' }}>
                     <div style={{ textAlign: isRTL ? 'left' : 'right' }}>
                       <div style={{ fontSize: 16, fontWeight: 800, color: rm.color }}>{c.compliance_score ?? '—'}%</div>
-                      <div style={{ fontSize: 9, color: 'var(--text-dim)' }}>{t(T.history.score, lang)}</div>
+                      <div style={{ fontSize: 12, color: 'var(--text-dim)' }}>{t(T.history.score, lang)}</div>
                     </div>
                     <span className={`badge ${rm.badge}`}>{rm.label}</span>
                     <ArrowRight size={13} color="var(--text-dim)" style={{ transform: isRTL ? 'rotate(180deg)' : 'none' }} />

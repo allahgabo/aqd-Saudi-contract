@@ -28,7 +28,7 @@ class ErrorBoundary extends Component<{children:ReactNode},{hasError:boolean;err
         <div style={{ maxWidth:480, textAlign:'center', background:'var(--bg-card)', border:'1px solid var(--border)', borderRadius:16, padding:'40px 32px' }}>
           <div style={{ fontSize:40, marginBottom:16 }}>⚠️</div>
           <h2 style={{ fontSize:18, fontWeight:700, marginBottom:8 }}>Something went wrong</h2>
-          <p style={{ color:'var(--text-muted)', fontSize:13, marginBottom:20 }}>{this.state.error}</p>
+          <p style={{ color:'var(--text-muted)', fontSize:15, marginBottom:20 }}>{this.state.error}</p>
           <button onClick={() => { this.setState({hasError:false,error:''}); window.location.href='/login'; }}
             className="btn btn-primary" style={{ padding:'10px 20px' }}>← Back to Login</button>
         </div>
@@ -110,8 +110,8 @@ function App() {
               duration: 3500,
               style: {
                 background: 'var(--bg-elevated)', color: 'var(--text)',
-                border: '1px solid var(--border-light)', fontFamily: 'Outfit, sans-serif',
-                fontSize: 13, borderRadius: '10px', boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+                border: '1px solid var(--border-light)', fontFamily: 'Cairo, sans-serif',
+                fontSize: 15, borderRadius: '10px', boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
               },
               success: { iconTheme: { primary: 'var(--green)', secondary: 'var(--bg-deep)' } },
               error:   { iconTheme: { primary: 'var(--red)',   secondary: 'var(--bg-deep)' } },

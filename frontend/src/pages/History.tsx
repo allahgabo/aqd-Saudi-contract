@@ -71,7 +71,7 @@ export default function History() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 28, gap: 16, flexWrap: 'wrap', flexDirection: isRTL ? 'row-reverse' : 'row' }}>
         <div style={{ textAlign: isRTL ? 'right' : 'left' }}>
           <h1 style={{ fontSize: 28, fontWeight: 900, marginBottom: 4, letterSpacing: isRTL ? 0 : '-0.5px' }}>{t(T.nav.myContracts, lang)}</h1>
-          <p style={{ color: 'var(--text-muted)', fontSize: 13 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15 }}>
             {contracts.length} {contracts.length === 1 ? t(T.history.analyzed, lang) : t(T.history.analyzedPlural, lang)}
             {filtered.length !== contracts.length && ` · ${filtered.length} ${t(T.history.shown, lang)}`}
           </p>
@@ -79,11 +79,11 @@ export default function History() {
         <div style={{ display: 'flex', gap: 8 }}>
           {contracts.length > 0 && (
             <button onClick={() => { exportContractsCSV(contracts); toast.success(lang === 'ar' ? 'تم التصدير!' : 'Exported!'); }}
-              className="btn btn-ghost" style={{ fontSize: 12, padding: '10px 14px', cursor: 'pointer' }}>
+              className="btn btn-ghost" style={{ fontSize: 14, padding: '10px 14px', cursor: 'pointer' }}>
               <Download size={13} /> {t(T.history.exportCSV, lang)}
             </button>
           )}
-          <Link to="/upload" className="btn btn-gold" style={{ padding: '11px 20px', fontSize: 13, textDecoration: 'none' }}>
+          <Link to="/upload" className="btn btn-gold" style={{ padding: '11px 20px', fontSize: 15, textDecoration: 'none' }}>
             <Upload size={14} /> {t(T.history.analyzeNew, lang)}
           </Link>
         </div>
@@ -95,7 +95,7 @@ export default function History() {
           <Search size={13} color="var(--text-dim)" style={{ position: 'absolute', [isRTL ? 'right' : 'left']: 11, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
           <input value={search} onChange={e => setSearch(e.target.value)}
             placeholder={t(T.history.search, lang)}
-            className="input" style={{ [isRTL ? 'paddingRight' : 'paddingLeft']: 32, fontSize: 12 }} />
+            className="input" style={{ [isRTL ? 'paddingRight' : 'paddingLeft']: 32, fontSize: 14 }} />
         </div>
         <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
           {FILTERS.map(({ key, label }) => {
@@ -103,10 +103,10 @@ export default function History() {
             const color = key === 'all' ? 'var(--primary)' : (RISK_MAP as any)[key]?.color;
             const count = key === 'all' ? contracts.length : contracts.filter(c => c.overall_risk === key).length;
             return (
-              <button key={key} onClick={() => setFilter(key)} style={{ padding: '7px 13px', borderRadius: 99, cursor: 'pointer', fontFamily: 'Cairo, Outfit, sans-serif', background: active ? `${color}15` : 'var(--bg-elevated)', color: active ? color : 'var(--text-muted)', border: `1px solid ${active ? `${color}30` : 'var(--border)'}`, fontSize: 11, fontWeight: active ? 700 : 400, display: 'flex', alignItems: 'center', gap: 5 }}>
+              <button key={key} onClick={() => setFilter(key)} style={{ padding: '7px 13px', borderRadius: 99, cursor: 'pointer', fontFamily: 'Cairo, sans-serif', background: active ? `${color}15` : 'var(--bg-elevated)', color: active ? color : 'var(--text-muted)', border: `1px solid ${active ? `${color}30` : 'var(--border)'}`, fontSize: 14, fontWeight: active ? 700 : 400, display: 'flex', alignItems: 'center', gap: 5 }}>
                 {key === 'all' && <Filter size={10} />}
                 {label}
-                <span style={{ fontSize: 9, background: active ? color : 'var(--border)', color: active ? 'white' : 'var(--text-dim)', borderRadius: 99, padding: '1px 5px', fontWeight: 700 }}>{count}</span>
+                <span style={{ fontSize: 12, background: active ? color : 'var(--border)', color: active ? 'white' : 'var(--text-dim)', borderRadius: 99, padding: '1px 5px', fontWeight: 700 }}>{count}</span>
               </button>
             );
           })}
@@ -120,11 +120,11 @@ export default function History() {
           <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 6 }}>
             {contracts.length === 0 ? t(T.history.noContracts, lang) : t(T.history.noMatch, lang)}
           </div>
-          <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 20 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 20 }}>
             {contracts.length === 0 ? t(T.history.uploadFirst, lang) : t(T.history.adjustSearch, lang)}
           </p>
           {contracts.length === 0
-            ? <Link to="/upload" className="btn btn-primary" style={{ display: 'inline-flex', textDecoration: 'none', fontSize: 13 }}><Upload size={14} /> {t(T.history.analyzeNew, lang)}</Link>
+            ? <Link to="/upload" className="btn btn-primary" style={{ display: 'inline-flex', textDecoration: 'none', fontSize: 15 }}><Upload size={14} /> {t(T.history.analyzeNew, lang)}</Link>
             : <button onClick={() => { setSearch(''); setFilter('all'); }} className="btn btn-ghost" style={{ cursor: 'pointer' }}>{t(T.history.clearFilters, lang)}</button>}
         </div>
       ) : (
@@ -141,17 +141,17 @@ export default function History() {
                   <Icon size={19} color={rm.color} />
                 </div>
                 <div style={{ flex: 1, minWidth: 0, textAlign: isRTL ? 'right' : 'left' }}>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)', marginBottom: 3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.file_name}</div>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.file_name}</div>
                   <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', flexDirection: isRTL ? 'row-reverse' : 'row' }}>
-                    {c.employer_name && <span style={{ fontSize: 10, color: 'var(--text-dim)' }}>🏢 {c.employer_name}</span>}
-                    {c.job_title    && <span style={{ fontSize: 10, color: 'var(--text-dim)' }}>💼 {c.job_title}</span>}
-                    <span style={{ fontSize: 10, color: 'var(--text-dim)', display: 'flex', alignItems: 'center', gap: 3 }}><Clock size={9} /> {timeAgo(c.created_at)}</span>
+                    {c.employer_name && <span style={{ fontSize: 13, color: 'var(--text-dim)' }}>🏢 {c.employer_name}</span>}
+                    {c.job_title    && <span style={{ fontSize: 13, color: 'var(--text-dim)' }}>💼 {c.job_title}</span>}
+                    <span style={{ fontSize: 13, color: 'var(--text-dim)', display: 'flex', alignItems: 'center', gap: 3 }}><Clock size={9} /> {timeAgo(c.created_at)}</span>
                   </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0, flexDirection: isRTL ? 'row-reverse' : 'row' }}>
                   <div style={{ textAlign: isRTL ? 'left' : 'right' }}>
                     <div style={{ fontSize: 20, fontWeight: 900, color: rm.color, lineHeight: 1 }}>{c.compliance_score ?? '—'}%</div>
-                    <div style={{ fontSize: 8, color: 'var(--text-dim)', fontWeight: 600 }}>{t(T.history.score, lang)}</div>
+                    <div style={{ fontSize: 12, color: 'var(--text-dim)', fontWeight: 600 }}>{t(T.history.score, lang)}</div>
                   </div>
                   <span className={`badge ${rm.badge}`}>{rm.label}</span>
                   <button onClick={e => del(c.id, e)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-dim)', padding: 4, borderRadius: 6, display: 'flex' }}

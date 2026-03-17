@@ -72,7 +72,7 @@ export default function Upload() {
           <div style={{ position: 'absolute', left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent)', boxShadow: '0 0 12px var(--primary)', animation: 'scanline 2s ease-in-out infinite' }} />
         </div>
         <h2 style={{ fontSize: 24, fontWeight: 900, marginBottom: 8 }}>{t(T.upload.analyzing, lang)}</h2>
-        <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 36 }}>{t(T.upload.analysisDesc, lang)}</p>
+        <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 36 }}>{t(T.upload.analysisDesc, lang)}</p>
         <div style={{ textAlign: isRTL ? 'right' : 'left', marginBottom: 28, display: 'flex', flexDirection: 'column', gap: 10 }}>
           {STEPS.map((s, i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, opacity: i > analysisStep ? 0.3 : 1, transition: 'opacity 0.4s', flexDirection: isRTL ? 'row-reverse' : 'row' }}>
@@ -81,7 +81,7 @@ export default function Upload() {
                  i === analysisStep ? <Loader size={16} color="var(--primary)" style={{ animation: 'spin 1s linear infinite' }} /> :
                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--text-dim)' }} />}
               </div>
-              <span style={{ fontSize: 13, color: i === analysisStep ? 'var(--text)' : 'var(--text-muted)', fontWeight: i === analysisStep ? 600 : 400 }}>{s}</span>
+              <span style={{ fontSize: 15, color: i === analysisStep ? 'var(--text)' : 'var(--text-muted)', fontWeight: i === analysisStep ? 600 : 400 }}>{s}</span>
             </div>
           ))}
         </div>
@@ -109,7 +109,7 @@ export default function Upload() {
     <div style={{ padding: '32px', maxWidth: 680, margin: '0 auto' }} className="animate-fade-up">
       <div style={{ marginBottom: 32, textAlign: isRTL ? 'right' : 'left' }}>
         <h1 style={{ fontSize: 28, fontWeight: 900, marginBottom: 6, letterSpacing: isRTL ? 0 : '-0.5px' }}>{t(T.upload.title, lang)}</h1>
-        <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>{t(T.upload.subtitle, lang)}</p>
+        <p style={{ color: 'var(--text-muted)', fontSize: 16 }}>{t(T.upload.subtitle, lang)}</p>
       </div>
 
       {/* Quota warning */}
@@ -117,10 +117,10 @@ export default function Upload() {
         <div style={{ padding: '16px 20px', background: 'rgba(245,158,11,0.06)', border: '1px solid rgba(245,158,11,0.25)', borderRadius: 12, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 14, flexDirection: isRTL ? 'row-reverse' : 'row' }}>
           <AlertTriangle size={20} color="var(--yellow)" style={{ flexShrink: 0 }} />
           <div style={{ flex: 1, textAlign: isRTL ? 'right' : 'left' }}>
-            <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--yellow)', marginBottom: 3 }}>{t(T.upload.limitWarning, lang)}</div>
-            <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{t(T.upload.limitDesc, lang)}</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--yellow)', marginBottom: 3 }}>{t(T.upload.limitWarning, lang)}</div>
+            <div style={{ fontSize: 14, color: 'var(--text-muted)' }}>{t(T.upload.limitDesc, lang)}</div>
           </div>
-          <Link to="/pricing" className="btn btn-gold" style={{ textDecoration: 'none', fontSize: 12, padding: '8px 14px', whiteSpace: 'nowrap', flexShrink: 0 }}>
+          <Link to="/pricing" className="btn btn-gold" style={{ textDecoration: 'none', fontSize: 14, padding: '8px 14px', whiteSpace: 'nowrap', flexShrink: 0 }}>
             <Zap size={12} /> {t(T.upgrade, lang)}
           </Link>
         </div>
@@ -128,7 +128,7 @@ export default function Upload() {
 
       {/* Remaining quota pill */}
       {isAuthenticated && canAnalyze && remainingAnalyses <= 3 && (
-        <div style={{ padding: '10px 14px', background: 'rgba(59,130,246,0.05)', border: '1px solid var(--border-blue)', borderRadius: 8, marginBottom: 16, fontSize: 12, color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 7, flexDirection: isRTL ? 'row-reverse' : 'row' }}>
+        <div style={{ padding: '10px 14px', background: 'rgba(59,130,246,0.05)', border: '1px solid var(--border-blue)', borderRadius: 8, marginBottom: 16, fontSize: 14, color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 7, flexDirection: isRTL ? 'row-reverse' : 'row' }}>
           <Zap size={12} color="var(--primary)" />
           <span>
             <strong style={{ color: 'var(--primary)' }}>{remainingAnalyses}</strong>{' '}
@@ -140,7 +140,7 @@ export default function Upload() {
 
       {/* Step 1: Document type */}
       <div className="card" style={{ marginBottom: 16 }}>
-        <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-dim)', letterSpacing: isRTL ? 0 : '1.5px', marginBottom: 14, textAlign: isRTL ? 'right' : 'left' }}>
+        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-dim)', letterSpacing: isRTL ? 0 : '1.5px', marginBottom: 14, textAlign: isRTL ? 'right' : 'left' }}>
           {t(T.upload.step1, lang)}
         </div>
         <div style={{ position: 'relative' }}>
@@ -148,8 +148,8 @@ export default function Upload() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexDirection: isRTL ? 'row-reverse' : 'row' }}>
               <span style={{ fontSize: 20 }}>{selectedType.icon}</span>
               <div style={{ textAlign: isRTL ? 'right' : 'left' }}>
-                <div style={{ fontSize: 14, fontWeight: 600 }}>{selectedType.label}</div>
-                <div style={{ fontSize: 11, color: 'var(--text-dim)' }}>{selectedType.desc}</div>
+                <div style={{ fontSize: 16, fontWeight: 600 }}>{selectedType.label}</div>
+                <div style={{ fontSize: 14, color: 'var(--text-dim)' }}>{selectedType.desc}</div>
               </div>
             </div>
             <ChevronDown size={16} color="var(--text-dim)" style={{ transform: openType ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s', flexShrink: 0 }} />
@@ -157,14 +157,14 @@ export default function Upload() {
           {openType && (
             <div style={{ position: 'absolute', top: '105%', left: 0, right: 0, zIndex: 10, background: 'var(--bg-card)', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-sm)', overflow: 'hidden', boxShadow: '0 16px 48px rgba(0,0,0,0.5)' }}>
               {CONTRACT_TYPES.map(ct => (
-                <button key={ct.value} onClick={() => { setContractType(ct.value); setOpenType(false); }} style={{ width: '100%', padding: '13px 16px', border: 'none', cursor: 'pointer', background: ct.value === contractType ? 'var(--primary-glow)' : 'transparent', color: 'var(--text)', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid var(--border)', textAlign: isRTL ? 'right' : 'left', transition: 'background 0.1s', flexDirection: isRTL ? 'row-reverse' : 'row', fontFamily: 'Cairo, Outfit, sans-serif' }}
+                <button key={ct.value} onClick={() => { setContractType(ct.value); setOpenType(false); }} style={{ width: '100%', padding: '13px 16px', border: 'none', cursor: 'pointer', background: ct.value === contractType ? 'var(--primary-glow)' : 'transparent', color: 'var(--text)', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid var(--border)', textAlign: isRTL ? 'right' : 'left', transition: 'background 0.1s', flexDirection: isRTL ? 'row-reverse' : 'row', fontFamily: 'Cairo, sans-serif' }}
                   onMouseEnter={e => { if (ct.value !== contractType) (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; }}
                   onMouseLeave={e => { if (ct.value !== contractType) (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
                 >
                   <span style={{ fontSize: 20 }}>{ct.icon}</span>
                   <div>
-                    <div style={{ fontSize: 13, fontWeight: 600 }}>{ct.label}</div>
-                    <div style={{ fontSize: 11, color: 'var(--text-dim)' }}>{ct.desc}</div>
+                    <div style={{ fontSize: 15, fontWeight: 600 }}>{ct.label}</div>
+                    <div style={{ fontSize: 14, color: 'var(--text-dim)' }}>{ct.desc}</div>
                   </div>
                 </button>
               ))}
@@ -175,7 +175,7 @@ export default function Upload() {
 
       {/* Step 2: File upload */}
       <div className="card" style={{ marginBottom: 16 }}>
-        <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-dim)', letterSpacing: isRTL ? 0 : '1.5px', marginBottom: 14, textAlign: isRTL ? 'right' : 'left' }}>
+        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-dim)', letterSpacing: isRTL ? 0 : '1.5px', marginBottom: 14, textAlign: isRTL ? 'right' : 'left' }}>
           {t(T.upload.step2, lang)}
         </div>
         <div
@@ -190,8 +190,8 @@ export default function Upload() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, flexDirection: isRTL ? 'row-reverse' : 'row' }}>
               <CheckCircle size={22} color="var(--green)" />
               <div style={{ textAlign: isRTL ? 'right' : 'left' }}>
-                <div style={{ fontSize: 14, fontWeight: 700 }}>{file.name}</div>
-                <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 2 }}>
+                <div style={{ fontSize: 16, fontWeight: 700 }}>{file.name}</div>
+                <div style={{ fontSize: 14, color: 'var(--text-muted)', marginTop: 2 }}>
                   {(file.size / 1024).toFixed(0)} KB · {lang === 'ar' ? 'جاهز للتحليل' : 'Ready to analyze'}
                 </div>
               </div>
@@ -207,7 +207,7 @@ export default function Upload() {
               <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 6 }}>
                 {drag ? (lang === 'ar' ? 'أفلت هنا' : 'Drop it here') : t(T.upload.dragDrop, lang)}
               </div>
-              <div style={{ fontSize: 12, color: 'var(--text-dim)' }}>{t(T.upload.supported, lang)}</div>
+              <div style={{ fontSize: 14, color: 'var(--text-dim)' }}>{t(T.upload.supported, lang)}</div>
             </>
           )}
         </div>
@@ -215,18 +215,18 @@ export default function Upload() {
         {error && (
           <div style={{ marginTop: 12, padding: '10px 14px', background: 'var(--red-bg)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
             <AlertCircle size={14} color="var(--red)" />
-            <span style={{ fontSize: 12, color: 'var(--red)' }}>{error}</span>
+            <span style={{ fontSize: 14, color: 'var(--red)' }}>{error}</span>
           </div>
         )}
       </div>
 
       {/* Privacy note */}
-      <div style={{ padding: '12px 16px', background: 'rgba(59,130,246,0.04)', border: '1px solid var(--border-blue)', borderRadius: 'var(--radius-sm)', marginBottom: 20, fontSize: 11, color: 'var(--text-dim)', lineHeight: 1.7, textAlign: isRTL ? 'right' : 'left' }}>
+      <div style={{ padding: '12px 16px', background: 'rgba(59,130,246,0.04)', border: '1px solid var(--border-blue)', borderRadius: 'var(--radius-sm)', marginBottom: 20, fontSize: 14, color: 'var(--text-dim)', lineHeight: 1.7, textAlign: isRTL ? 'right' : 'left' }}>
         {t(T.upload.privacy, lang)}
       </div>
 
       <button onClick={submit} disabled={!file || (isAuthenticated && !canAnalyze)} className="btn btn-primary"
-        style={{ width: '100%', padding: '14px', fontSize: 14, opacity: !file || (isAuthenticated && !canAnalyze) ? 0.4 : 1 }}>
+        style={{ width: '100%', padding: '14px', fontSize: 16, opacity: !file || (isAuthenticated && !canAnalyze) ? 0.4 : 1 }}>
         {!canAnalyze && isAuthenticated
           ? <><AlertTriangle size={15} /> {t(T.upload.limitReached, lang)}</>
           : <><Zap size={15} /> {t(T.upload.startAnalysis, lang)}</>}

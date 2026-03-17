@@ -42,7 +42,7 @@ export default function AuthPage({ mode = 'login' }: { mode?: 'login' | 'registe
     } finally { setLoading(false); }
   };
 
-  const inputStyle = { fontSize: 13 };
+  const inputStyle = { fontSize: 15 };
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', background: 'var(--bg-deep)', position: 'relative', overflow: 'hidden', direction: isRTL ? 'rtl' : 'ltr' as any }}>
@@ -51,7 +51,7 @@ export default function AuthPage({ mode = 'login' }: { mode?: 'login' | 'registe
       <div style={{ position: 'absolute', bottom: -100, right: -100, width: 300, height: 300, borderRadius: '50%', background: 'rgba(234,179,8,0.10)', filter: 'blur(80px)', pointerEvents: 'none' }} />
 
       {/* Language toggle top-right */}
-      <button onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} style={{ position: 'absolute', top: 20, [isRTL ? 'left' : 'right']: 20, zIndex: 10, display: 'flex', alignItems: 'center', gap: 6, padding: '6px 12px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 99, cursor: 'pointer', color: 'var(--primary)', fontSize: 12, fontWeight: 600, fontFamily: 'Cairo, Outfit, sans-serif' }}>
+      <button onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} style={{ position: 'absolute', top: 20, [isRTL ? 'left' : 'right']: 20, zIndex: 10, display: 'flex', alignItems: 'center', gap: 6, padding: '6px 12px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 99, cursor: 'pointer', color: 'var(--primary)', fontSize: 14, fontWeight: 600, fontFamily: 'Cairo, sans-serif' }}>
         <Languages size={13} /> {lang === 'en' ? 'العربية' : 'English'}
       </button>
 
@@ -63,7 +63,7 @@ export default function AuthPage({ mode = 'login' }: { mode?: 'login' | 'registe
           </div>
           <div>
             <div style={{ fontSize: 22, fontWeight: 900 }}>{t(T.appName, lang)}</div>
-            <div style={{ fontSize: 11, color: 'var(--text-dim)', fontWeight: 500, letterSpacing: isRTL ? 0 : '1px' }}>{t(T.appTagline, lang).toUpperCase()}</div>
+            <div style={{ fontSize: 14, color: 'var(--text-dim)', fontWeight: 500, letterSpacing: isRTL ? 0 : '1px' }}>{t(T.appTagline, lang).toUpperCase()}</div>
           </div>
         </div>
 
@@ -86,14 +86,14 @@ export default function AuthPage({ mode = 'login' }: { mode?: 'login' | 'registe
               <div style={{ width: 22, height: 22, borderRadius: '50%', background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <CheckCircle size={12} color="var(--green)" />
               </div>
-              <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>{f}</span>
+              <span style={{ fontSize: 15, color: 'var(--text-muted)' }}>{f}</span>
             </div>
           ))}
         </div>
 
         <div style={{ marginTop: 48, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 16px', borderRadius: 10, background: 'var(--gold-glow)', border: '1px solid var(--border-gold)', width: 'fit-content', flexDirection: isRTL ? 'row-reverse' : 'row' }}>
           <Zap size={13} color="var(--gold)" />
-          <span style={{ fontSize: 11, color: 'var(--gold)', fontWeight: 600 }}>{t(T.auth.poweredBy, lang)}</span>
+          <span style={{ fontSize: 14, color: 'var(--gold)', fontWeight: 600 }}>{t(T.auth.poweredBy, lang)}</span>
         </div>
       </div>
 
@@ -105,7 +105,7 @@ export default function AuthPage({ mode = 'login' }: { mode?: 'login' | 'registe
             <h2 style={{ fontSize: 24, fontWeight: 800, marginBottom: 6, textAlign: isRTL ? 'right' : 'left' }}>
               {isLogin ? t(T.auth.welcomeBack, lang) : t(T.auth.createAccount, lang)}
             </h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: 13, marginBottom: 28, textAlign: isRTL ? 'right' : 'left' }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 28, textAlign: isRTL ? 'right' : 'left' }}>
               {isLogin ? t(T.auth.signInSubtitle, lang) : t(T.auth.signUpSubtitle, lang)}
             </p>
 
@@ -118,7 +118,7 @@ export default function AuthPage({ mode = 'login' }: { mode?: 'login' | 'registe
                       { key: 'last_name',  label: t(T.auth.lastName, lang),  ph: lang === 'ar' ? 'الراشدي' : 'Al-Rashidi' },
                     ].map(({ key, label, ph }) => (
                       <div key={key}>
-                        <label style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5 }}>{label}</label>
+                        <label style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5 }}>{label}</label>
                         <input className="input" value={(form as any)[key]} onChange={e => set(key, e.target.value)} placeholder={ph} style={inputStyle} />
                       </div>
                     ))}
@@ -126,16 +126,16 @@ export default function AuthPage({ mode = 'login' }: { mode?: 'login' | 'registe
                 )}
                 {!isLogin && (
                   <div>
-                    <label style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5 }}>{t(T.auth.email, lang)}</label>
+                    <label style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5 }}>{t(T.auth.email, lang)}</label>
                     <input className="input" type="email" value={form.email} onChange={e => set('email', e.target.value)} placeholder="you@example.com" required style={inputStyle} />
                   </div>
                 )}
                 <div>
-                  <label style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5 }}>{t(T.auth.username, lang)}</label>
+                  <label style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5 }}>{t(T.auth.username, lang)}</label>
                   <input className="input" value={form.username} onChange={e => set('username', e.target.value)} placeholder={lang === 'ar' ? 'اسم_المستخدم' : 'your_username'} required autoComplete="username" style={inputStyle} />
                 </div>
                 <div>
-                  <label style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5 }}>{t(T.auth.password, lang)}</label>
+                  <label style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5 }}>{t(T.auth.password, lang)}</label>
                   <div style={{ position: 'relative' }}>
                     <input className="input" type={showPass ? 'text' : 'password'} value={form.password} onChange={e => set('password', e.target.value)} placeholder="••••••••" required style={{ ...inputStyle, [isRTL ? 'paddingLeft' : 'paddingRight']: 44 }} autoComplete={isLogin ? 'current-password' : 'new-password'} />
                     <button type="button" onClick={() => setShowPass(s => !s)} style={{ position: 'absolute', [isRTL ? 'left' : 'right']: 14, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-dim)', padding: 2 }}>
@@ -145,14 +145,14 @@ export default function AuthPage({ mode = 'login' }: { mode?: 'login' | 'registe
                 </div>
                 {!isLogin && (
                   <div>
-                    <label style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5 }}>{t(T.auth.confirmPassword, lang)}</label>
+                    <label style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5 }}>{t(T.auth.confirmPassword, lang)}</label>
                     <input className="input" type="password" value={form.confirmPassword} onChange={e => set('confirmPassword', e.target.value)} placeholder="••••••••" required style={inputStyle} />
                   </div>
                 )}
                 {error && (
-                  <div style={{ padding: '10px 14px', borderRadius: 8, background: 'var(--red-bg)', border: '1px solid rgba(239,68,68,0.2)', fontSize: 12, color: 'var(--red)', lineHeight: 1.5 }}>{error}</div>
+                  <div style={{ padding: '10px 14px', borderRadius: 8, background: 'var(--red-bg)', border: '1px solid rgba(239,68,68,0.2)', fontSize: 14, color: 'var(--red)', lineHeight: 1.5 }}>{error}</div>
                 )}
-                <button type="submit" className="btn btn-primary" disabled={loading} style={{ width: '100%', padding: '13px', fontSize: 14, marginTop: 4, opacity: loading ? 0.7 : 1 }}>
+                <button type="submit" className="btn btn-primary" disabled={loading} style={{ width: '100%', padding: '13px', fontSize: 16, marginTop: 4, opacity: loading ? 0.7 : 1 }}>
                   {loading
                     ? <><div style={{ width: 16, height: 16, border: '2px solid rgba(255,255,255,0.3)', borderTopColor: 'white', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} /> {t(T.auth.processing, lang)}</>
                     : <>{isLogin ? t(T.signIn, lang) : t(T.signUp, lang)} <ArrowRight size={15} style={{ transform: isRTL ? 'rotate(180deg)' : 'none' }} /></>}
@@ -161,8 +161,8 @@ export default function AuthPage({ mode = 'login' }: { mode?: 'login' | 'registe
             </form>
 
             <div style={{ marginTop: 24, textAlign: 'center' }}>
-              <span style={{ fontSize: 13, color: 'var(--text-dim)' }}>{isLogin ? t(T.auth.noAccount, lang) : t(T.auth.haveAccount, lang)}</span>
-              <Link to={isLogin ? '/register' : '/login'} style={{ fontSize: 13, color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
+              <span style={{ fontSize: 15, color: 'var(--text-dim)' }}>{isLogin ? t(T.auth.noAccount, lang) : t(T.auth.haveAccount, lang)}</span>
+              <Link to={isLogin ? '/register' : '/login'} style={{ fontSize: 15, color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
                 {isLogin ? t(T.auth.signUpFree, lang) : t(T.signIn, lang)}
               </Link>
             </div>

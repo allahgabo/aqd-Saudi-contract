@@ -58,7 +58,7 @@ export default function Settings() {
     <div style={{ padding: '32px', maxWidth: 720, margin: '0 auto' }} className="animate-fade-up">
       <div style={{ marginBottom: 32 }}>
         <h1 style={{ fontSize: 28, fontWeight: 900, letterSpacing: '-0.5px', marginBottom: 4 }}>Account Settings</h1>
-        <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>Manage your profile, plan, and preferences</p>
+        <p style={{ color: 'var(--text-muted)', fontSize: 16 }}>Manage your profile, plan, and preferences</p>
       </div>
 
       {/* Avatar + identity card */}
@@ -83,32 +83,32 @@ export default function Settings() {
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
               <div>
-                <label style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5, letterSpacing: '0.5px' }}>FIRST NAME</label>
-                <input className="input" value={form.first_name} onChange={e => set('first_name', e.target.value)} placeholder="Ahmed" style={{ fontSize: 13 }} />
+                <label style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5, letterSpacing: '0.5px' }}>FIRST NAME</label>
+                <input className="input" value={form.first_name} onChange={e => set('first_name', e.target.value)} placeholder="Ahmed" style={{ fontSize: 15 }} />
               </div>
               <div>
-                <label style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5, letterSpacing: '0.5px' }}>LAST NAME</label>
-                <input className="input" value={form.last_name} onChange={e => set('last_name', e.target.value)} placeholder="Al-Rashidi" style={{ fontSize: 13 }} />
+                <label style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5, letterSpacing: '0.5px' }}>LAST NAME</label>
+                <input className="input" value={form.last_name} onChange={e => set('last_name', e.target.value)} placeholder="Al-Rashidi" style={{ fontSize: 15 }} />
               </div>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
               <div>
-                <label style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5, letterSpacing: '0.5px' }}>COMPANY (OPTIONAL)</label>
-                <input className="input" value={form.company} onChange={e => set('company', e.target.value)} placeholder="Your company" style={{ fontSize: 13 }} />
+                <label style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5, letterSpacing: '0.5px' }}>COMPANY (OPTIONAL)</label>
+                <input className="input" value={form.company} onChange={e => set('company', e.target.value)} placeholder="Your company" style={{ fontSize: 15 }} />
               </div>
               <div>
-                <label style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5, letterSpacing: '0.5px' }}>PHONE (OPTIONAL)</label>
-                <input className="input" value={form.phone} onChange={e => set('phone', e.target.value)} placeholder="+966 5x xxx xxxx" style={{ fontSize: 13 }} />
+                <label style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-dim)', display: 'block', marginBottom: 5, letterSpacing: '0.5px' }}>PHONE (OPTIONAL)</label>
+                <input className="input" value={form.phone} onChange={e => set('phone', e.target.value)} placeholder="+966 5x xxx xxxx" style={{ fontSize: 15 }} />
               </div>
             </div>
           </div>
         </div>
 
         <div style={{ marginTop: 16, paddingTop: 16, borderTop: '1px solid var(--border)', display: 'flex', gap: 10 }}>
-          <button onClick={save} disabled={saving} className="btn btn-primary" style={{ padding: '10px 20px', fontSize: 13, opacity: saving ? 0.7 : 1 }}>
+          <button onClick={save} disabled={saving} className="btn btn-primary" style={{ padding: '10px 20px', fontSize: 15, opacity: saving ? 0.7 : 1 }}>
             {saving ? <><div style={{ width: 13, height: 13, border: '2px solid rgba(255,255,255,0.3)', borderTopColor: 'white', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} /> Saving…</> : <><Save size={13} /> Save Changes</>}
           </button>
-          <div style={{ display: 'flex', gap: 10, marginLeft: 'auto', alignItems: 'center', fontSize: 12, color: 'var(--text-dim)' }}>
+          <div style={{ display: 'flex', gap: 10, marginLeft: 'auto', alignItems: 'center', fontSize: 14, color: 'var(--text-dim)' }}>
             <Mail size={12} /> {user.email}
             <span style={{ color: 'var(--border-light)' }}>·</span>
             <User size={12} /> @{user.username}
@@ -126,14 +126,14 @@ export default function Settings() {
           </div>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 16, fontWeight: 800, color: planColor }}>{plan?.display_name ?? 'Free'} Plan</div>
-            <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 2 }}>
+            <div style={{ fontSize: 14, color: 'var(--text-muted)', marginTop: 2 }}>
               {plan?.monthly_limit === -1
                 ? 'Unlimited analyses per month'
                 : `${plan?.monthly_limit ?? 3} analyses per month · ${remainingAnalyses} remaining`}
             </div>
           </div>
           {planName !== 'enterprise' && (
-            <Link to="/pricing" className="btn btn-ghost" style={{ textDecoration: 'none', fontSize: 12, padding: '8px 14px', display: 'flex', alignItems: 'center', gap: 5 }}>
+            <Link to="/pricing" className="btn btn-ghost" style={{ textDecoration: 'none', fontSize: 14, padding: '8px 14px', display: 'flex', alignItems: 'center', gap: 5 }}>
               <Zap size={12} /> Upgrade <ArrowRight size={11} />
             </Link>
           )}
@@ -142,7 +142,7 @@ export default function Settings() {
         {/* Usage bar */}
         {plan?.monthly_limit !== -1 && (
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'var(--text-dim)', marginBottom: 6 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14, color: 'var(--text-dim)', marginBottom: 6 }}>
               <span>This month's usage</span>
               <span style={{ fontWeight: 700, color: 'var(--text)' }}>
                 {user.profile?.contracts_this_month ?? 0} / {plan?.monthly_limit ?? 3}
@@ -174,8 +174,8 @@ export default function Settings() {
                 <Icon size={12} color="var(--primary)" />
               </div>
               <div>
-                <div style={{ fontSize: 9, color: 'var(--text-dim)', fontWeight: 700, letterSpacing: '0.5px' }}>{label.toUpperCase()}</div>
-                <div style={{ fontSize: 13, fontWeight: 600, marginTop: 1 }}>{value}</div>
+                <div style={{ fontSize: 12, color: 'var(--text-dim)', fontWeight: 700, letterSpacing: '0.5px' }}>{label.toUpperCase()}</div>
+                <div style={{ fontSize: 15, fontWeight: 600, marginTop: 1 }}>{value}</div>
               </div>
             </div>
           ))}
@@ -197,11 +197,11 @@ export default function Settings() {
               background: lang === code ? 'var(--primary-glow)' : 'var(--bg-elevated)',
               border: `1px solid ${lang === code ? 'var(--primary)' : 'var(--border)'}`,
               color: lang === code ? 'var(--primary)' : 'var(--text-muted)',
-              fontFamily: 'Cairo, Outfit, sans-serif', transition: 'all 0.15s',
+              fontFamily: 'Cairo, sans-serif', transition: 'all 0.15s',
               fontWeight: lang === code ? 700 : 400,
             }}>
-              <div style={{ fontSize: 14, marginBottom: 3 }}>{label}</div>
-              <div style={{ fontSize: 9, opacity: 0.7 }}>{sub}</div>
+              <div style={{ fontSize: 16, marginBottom: 3 }}>{label}</div>
+              <div style={{ fontSize: 12, opacity: 0.7 }}>{sub}</div>
             </button>
           ))}
         </div>
@@ -212,7 +212,7 @@ export default function Settings() {
         <div style={{ fontSize: 9.5, fontWeight: 700, color: 'var(--red)', letterSpacing: '1.5px', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
           <AlertTriangle size={11} /> DANGER ZONE
         </div>
-        <button onClick={handleLogout} style={{ padding: '11px 20px', background: 'transparent', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 9, color: 'var(--red)', cursor: 'pointer', fontSize: 13, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 8, fontFamily: 'Outfit', transition: 'background 0.15s' }}
+        <button onClick={handleLogout} style={{ padding: '11px 20px', background: 'transparent', border: '1px solid rgba(239,68,68,0.3)', borderRadius: 9, color: 'var(--red)', cursor: 'pointer', fontSize: 15, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 8, fontFamily: 'Cairo, sans-serif', transition: 'background 0.15s' }}
           onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--red-bg)'}
           onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
         >

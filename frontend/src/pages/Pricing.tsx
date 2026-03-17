@@ -126,7 +126,7 @@ export default function Pricing() {
       <div style={{ textAlign: 'center', marginBottom: 60 }} className="animate-fade-up">
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '5px 14px', borderRadius: 99, background: 'var(--gold-glow)', border: '1px solid var(--border-gold)', marginBottom: 20 }}>
           <Zap size={11} color="var(--gold)" />
-          <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--gold)', letterSpacing: '1px' }}>TRANSPARENT PRICING</span>
+          <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--gold)', letterSpacing: '1px' }}>TRANSPARENT PRICING</span>
         </div>
         <h1 style={{ fontSize: 'clamp(30px,5vw,52px)', fontWeight: 900, letterSpacing: '-1.5px', marginBottom: 14 }}>
           Simple, honest pricing
@@ -135,7 +135,7 @@ export default function Pricing() {
           Start free — upgrade when you need more. All prices in Saudi Riyals.
         </p>
         {user && (
-          <div style={{ marginTop: 16, fontSize: 13, color: 'var(--text-muted)' }}>
+          <div style={{ marginTop: 16, fontSize: 15, color: 'var(--text-muted)' }}>
             Current plan: <strong style={{ color: 'var(--text)' }}>{user.profile?.plan?.display_name ?? 'Free'}</strong>
             {' · '}
             <Link to="/settings" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>Manage account →</Link>
@@ -166,12 +166,12 @@ export default function Pricing() {
 
               {/* Badge */}
               {plan.badge && (
-                <div style={{ position: 'absolute', top: 16, right: 16, fontSize: 8, fontWeight: 800, padding: '3px 9px', borderRadius: 99, background: plan.color, color: plan.name === 'enterprise' ? '#0A0D1A' : 'white', letterSpacing: '0.5px' }}>
+                <div style={{ position: 'absolute', top: 16, right: 16, fontSize: 12, fontWeight: 800, padding: '3px 9px', borderRadius: 99, background: plan.color, color: plan.name === 'enterprise' ? '#0A0D1A' : 'white', letterSpacing: '0.5px' }}>
                   {plan.badge}
                 </div>
               )}
               {isCurrent && (
-                <div style={{ position: 'absolute', top: 16, right: plan.badge ? 88 : 16, fontSize: 8, fontWeight: 800, padding: '3px 9px', borderRadius: 99, background: 'rgba(16,185,129,0.15)', color: 'var(--green)', border: '1px solid rgba(16,185,129,0.3)', letterSpacing: '0.5px' }}>
+                <div style={{ position: 'absolute', top: 16, right: plan.badge ? 88 : 16, fontSize: 12, fontWeight: 800, padding: '3px 9px', borderRadius: 99, background: 'rgba(16,185,129,0.15)', color: 'var(--green)', border: '1px solid rgba(16,185,129,0.3)', letterSpacing: '0.5px' }}>
                   CURRENT
                 </div>
               )}
@@ -185,7 +185,7 @@ export default function Pricing() {
                   <div style={{ fontSize: 18, fontWeight: 900, color: 'var(--text)', letterSpacing: '-0.3px' }}>
                     {plan.label}
                   </div>
-                  <div style={{ fontSize: 11, color: 'var(--text-dim)', fontFamily: 'Playfair Display, serif', fontStyle: 'italic' }}>{plan.labelAr}</div>
+                  <div style={{ fontSize: 14, color: 'var(--text-dim)', fontFamily: 'Playfair Display, serif', fontStyle: 'italic' }}>{plan.labelAr}</div>
                 </div>
               </div>
 
@@ -194,19 +194,19 @@ export default function Pricing() {
                 <span style={{ fontSize: 42, fontWeight: 900, color: plan.price === 0 ? 'var(--text)' : plan.color, letterSpacing: '-2px' }}>
                   {plan.price === 0 ? 'Free' : `SAR ${plan.price}`}
                 </span>
-                {plan.period && <span style={{ fontSize: 13, color: 'var(--text-dim)', marginLeft: 4 }}>{plan.period}</span>}
+                {plan.period && <span style={{ fontSize: 15, color: 'var(--text-dim)', marginLeft: 4 }}>{plan.period}</span>}
               </div>
 
-              <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 22 }}>{plan.description}</p>
+              <p style={{ fontSize: 14, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 22 }}>{plan.description}</p>
 
               {/* Features */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
                 {plan.features.map(f => (
-                  <div key={f.text} style={{ display: 'flex', alignItems: 'center', gap: 9, fontSize: 12, color: f.ok ? 'var(--text)' : 'var(--text-dim)', textDecoration: f.ok ? 'none' : 'none' }}>
+                  <div key={f.text} style={{ display: 'flex', alignItems: 'center', gap: 9, fontSize: 14, color: f.ok ? 'var(--text)' : 'var(--text-dim)', textDecoration: f.ok ? 'none' : 'none' }}>
                     <div style={{ width: 18, height: 18, borderRadius: '50%', flexShrink: 0, background: f.ok ? `${plan.color}15` : 'var(--bg-elevated)', border: `1px solid ${f.ok ? plan.color + '30' : 'var(--border)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       {f.ok
                         ? <Check size={10} color={plan.color} />
-                        : <span style={{ fontSize: 10, color: 'var(--text-dim)' }}>—</span>}
+                        : <span style={{ fontSize: 13, color: 'var(--text-dim)' }}>—</span>}
                     </div>
                     {f.text}
                   </div>
@@ -219,7 +219,7 @@ export default function Pricing() {
                 disabled={isCurrent || isLoading || plan.name === 'free'}
                 style={{
                   width: '100%', padding: '12px', borderRadius: 10, cursor: isCurrent || plan.name === 'free' ? 'default' : 'pointer',
-                  border: 'none', fontFamily: 'Outfit', fontWeight: 700, fontSize: 13,
+                  border: 'none', fontFamily: 'Cairo, sans-serif', fontWeight: 700, fontSize: 15,
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
                   opacity: (isCurrent || plan.name === 'free') ? 0.6 : 1,
                   background: plan.ctaStyle === 'primary'
@@ -246,24 +246,24 @@ export default function Pricing() {
       <div className="card" style={{ overflow: 'hidden', marginBottom: 48 }}>
         <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--border)' }}>
           <h2 style={{ fontSize: 18, fontWeight: 800, marginBottom: 4 }}>Full feature comparison</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: 13 }}>See exactly what you get with each plan</p>
+          <p style={{ color: 'var(--text-muted)', fontSize: 15 }}>See exactly what you get with each plan</p>
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid var(--border)' }}>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 11, fontWeight: 700, color: 'var(--text-dim)', letterSpacing: '0.5px' }}>FEATURE</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 14, fontWeight: 700, color: 'var(--text-dim)', letterSpacing: '0.5px' }}>FEATURE</th>
                 {['Free', 'Pro', 'Enterprise'].map((p, i) => (
-                  <th key={p} style={{ padding: '14px 20px', textAlign: 'center', fontSize: 12, fontWeight: 800, color: [PLANS[0].color, PLANS[1].color, PLANS[2].color][i] }}>{p}</th>
+                  <th key={p} style={{ padding: '14px 20px', textAlign: 'center', fontSize: 14, fontWeight: 800, color: [PLANS[0].color, PLANS[1].color, PLANS[2].color][i] }}>{p}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {COMPARISON.map((row, i) => (
                 <tr key={row.feature} style={{ borderBottom: '1px solid var(--border)', background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.01)' }}>
-                  <td style={{ padding: '12px 20px', fontSize: 13, color: 'var(--text-muted)' }}>{row.feature}</td>
+                  <td style={{ padding: '12px 20px', fontSize: 15, color: 'var(--text-muted)' }}>{row.feature}</td>
                   {[row.free, row.pro, row.enterprise].map((val, j) => (
-                    <td key={j} style={{ padding: '12px 20px', textAlign: 'center', fontSize: 12, fontWeight: 600, color: val === '—' ? 'var(--text-dim)' : val === '✓' ? 'var(--green)' : 'var(--text)' }}>
+                    <td key={j} style={{ padding: '12px 20px', textAlign: 'center', fontSize: 14, fontWeight: 600, color: val === '—' ? 'var(--text-dim)' : val === '✓' ? 'var(--green)' : 'var(--text)' }}>
                       {val === '✓' ? <Check size={14} color="var(--green)" style={{ margin: 'auto' }} /> : val}
                     </td>
                   ))}
@@ -278,7 +278,7 @@ export default function Pricing() {
       <div style={{ textAlign: 'center', padding: '32px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 16 }}>
         <Lock size={24} color="var(--primary)" style={{ margin: '0 auto 12px', display: 'block' }} />
         <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 8 }}>Your data stays private</h3>
-        <p style={{ color: 'var(--text-muted)', fontSize: 13, maxWidth: 480, margin: '0 auto', lineHeight: 1.7 }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: 15, maxWidth: 480, margin: '0 auto', lineHeight: 1.7 }}>
           Contract files are used only for analysis. We never share, sell, or store your documents longer than needed.
           Cancel anytime — no lock-in.
         </p>

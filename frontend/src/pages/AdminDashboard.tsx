@@ -19,7 +19,7 @@ function PlanPill({ plan }: { plan: string }) {
   };
   const s = cfg[plan] || cfg.free;
   return (
-    <span style={{ fontSize: 9, fontWeight: 700, padding: '2px 8px', borderRadius: 99, background: s.bg, color: s.color, letterSpacing: '0.5px', border: `1px solid ${s.color}25` }}>
+    <span style={{ fontSize: 12, fontWeight: 700, padding: '2px 8px', borderRadius: 99, background: s.bg, color: s.color, letterSpacing: '0.5px', border: `1px solid ${s.color}25` }}>
       {plan.toUpperCase()}
     </span>
   );
@@ -33,8 +33,8 @@ function StatCard({ icon: Icon, label, value, sub, color }: any) {
         <Icon size={17} color={color} />
       </div>
       <div style={{ fontSize: 30, fontWeight: 900, color: 'var(--text)', lineHeight: 1, marginBottom: 4 }}>{value}</div>
-      <div style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 500 }}>{label}</div>
-      {sub && <div style={{ fontSize: 10, color: 'var(--text-dim)', marginTop: 2 }}>{sub}</div>}
+      <div style={{ fontSize: 14, color: 'var(--text-muted)', fontWeight: 500 }}>{label}</div>
+      {sub && <div style={{ fontSize: 13, color: 'var(--text-dim)', marginTop: 2 }}>{sub}</div>}
     </div>
   );
 }
@@ -100,7 +100,7 @@ export default function AdminDashboard() {
           </div>
           <h1 style={{ fontSize: 26, fontWeight: 900, letterSpacing: '-0.5px' }}>Admin Dashboard</h1>
         </div>
-        <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>Manage users, plans, and monitor platform usage</p>
+        <p style={{ color: 'var(--text-muted)', fontSize: 16 }}>Manage users, plans, and monitor platform usage</p>
       </div>
 
       {/* Stats */}
@@ -119,25 +119,25 @@ export default function AdminDashboard() {
         <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--border)', display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
           <div style={{ flex: 1, minWidth: 200, position: 'relative' }}>
             <Search size={13} color="var(--text-dim)" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
-            <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search users…" className="input" style={{ paddingLeft: 30, fontSize: 12 }} />
+            <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search users…" className="input" style={{ paddingLeft: 30, fontSize: 14 }} />
           </div>
           <div style={{ display: 'flex', gap: 5 }}>
             {(['all','free','pro','enterprise'] as const).map(f => (
               <button key={f} onClick={() => setPlanFilter(f)} style={{
-                padding: '7px 12px', borderRadius: 99, cursor: 'pointer', fontFamily: 'Outfit',
+                padding: '7px 12px', borderRadius: 99, cursor: 'pointer', fontFamily: 'Cairo, sans-serif',
                 background: planFilter === f ? 'var(--primary-glow)' : 'var(--bg-elevated)',
                 color: planFilter === f ? 'var(--primary)' : 'var(--text-muted)',
                 border: `1px solid ${planFilter === f ? 'rgba(59,130,246,0.3)' : 'var(--border)'}`,
-                fontSize: 11, fontWeight: planFilter === f ? 700 : 400,
+                fontSize: 14, fontWeight: planFilter === f ? 700 : 400,
               }}>
                 {f.charAt(0).toUpperCase() + f.slice(1)}
-                <span style={{ marginLeft: 5, fontSize: 9, background: planFilter === f ? 'var(--primary)' : 'var(--border)', color: planFilter === f ? 'white' : 'var(--text-dim)', borderRadius: 99, padding: '1px 5px', fontWeight: 700 }}>
+                <span style={{ marginLeft: 5, fontSize: 12, background: planFilter === f ? 'var(--primary)' : 'var(--border)', color: planFilter === f ? 'white' : 'var(--text-dim)', borderRadius: 99, padding: '1px 5px', fontWeight: 700 }}>
                   {f === 'all' ? users.length : users.filter(u => u.profile?.plan?.name === f).length}
                 </span>
               </button>
             ))}
           </div>
-          <div style={{ fontSize: 12, color: 'var(--text-dim)' }}>{filtered.length} users</div>
+          <div style={{ fontSize: 14, color: 'var(--text-dim)' }}>{filtered.length} users</div>
         </div>
 
         {/* Table */}
@@ -146,13 +146,13 @@ export default function AdminDashboard() {
             <thead>
               <tr style={{ borderBottom: '1px solid var(--border)' }}>
                 {['User','Email','Plan','Contracts','Joined','Actions'].map(h => (
-                  <th key={h} style={{ padding: '12px 18px', textAlign: 'left', fontSize: 10, fontWeight: 700, color: 'var(--text-dim)', letterSpacing: '0.5px', whiteSpace: 'nowrap' }}>{h.toUpperCase()}</th>
+                  <th key={h} style={{ padding: '12px 18px', textAlign: 'left', fontSize: 13, fontWeight: 700, color: 'var(--text-dim)', letterSpacing: '0.5px', whiteSpace: 'nowrap' }}>{h.toUpperCase()}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {filtered.length === 0 ? (
-                <tr><td colSpan={6} style={{ padding: '40px', textAlign: 'center', color: 'var(--text-muted)', fontSize: 13 }}>No users found</td></tr>
+                <tr><td colSpan={6} style={{ padding: '40px', textAlign: 'center', color: 'var(--text-muted)', fontSize: 15 }}>No users found</td></tr>
               ) : filtered.map((u, i) => (
                 <tr key={u.id} style={{ borderBottom: '1px solid var(--border)', background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.01)', transition: 'background 0.1s' }}
                   onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.03)'}
@@ -160,29 +160,29 @@ export default function AdminDashboard() {
                 >
                   <td style={{ padding: '12px 18px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <div style={{ width: 30, height: 30, borderRadius: '50%', background: `linear-gradient(135deg, ${u.profile?.avatar_color || '#3B82F6'}, var(--accent))`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 800, color: 'white', flexShrink: 0 }}>
+                      <div style={{ width: 30, height: 30, borderRadius: '50%', background: `linear-gradient(135deg, ${u.profile?.avatar_color || '#3B82F6'}, var(--accent))`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, fontWeight: 800, color: 'white', flexShrink: 0 }}>
                         {(u.first_name?.[0] || u.username[0]).toUpperCase()}
                       </div>
                       <div>
-                        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
+                        <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--text)' }}>
                           {u.first_name ? `${u.first_name} ${u.last_name}` : u.username}
-                          {u.profile?.is_admin && <span style={{ marginLeft: 6, fontSize: 8, background: 'rgba(234,179,8,0.15)', color: 'var(--gold)', padding: '1px 5px', borderRadius: 99, fontWeight: 700 }}>ADMIN</span>}
+                          {u.profile?.is_admin && <span style={{ marginLeft: 6, fontSize: 12, background: 'rgba(234,179,8,0.15)', color: 'var(--gold)', padding: '1px 5px', borderRadius: 99, fontWeight: 700 }}>ADMIN</span>}
                         </div>
-                        <div style={{ fontSize: 10, color: 'var(--text-dim)' }}>@{u.username}</div>
+                        <div style={{ fontSize: 13, color: 'var(--text-dim)' }}>@{u.username}</div>
                       </div>
                     </div>
                   </td>
-                  <td style={{ padding: '12px 18px', fontSize: 12, color: 'var(--text-muted)' }}>{u.email}</td>
+                  <td style={{ padding: '12px 18px', fontSize: 14, color: 'var(--text-muted)' }}>{u.email}</td>
                   <td style={{ padding: '12px 18px' }}><PlanPill plan={u.profile?.plan?.name || 'free'} /></td>
-                  <td style={{ padding: '12px 18px', fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{u.contract_count}</td>
-                  <td style={{ padding: '12px 18px', fontSize: 11, color: 'var(--text-dim)', whiteSpace: 'nowrap' }}>
+                  <td style={{ padding: '12px 18px', fontSize: 15, fontWeight: 700, color: 'var(--text)' }}>{u.contract_count}</td>
+                  <td style={{ padding: '12px 18px', fontSize: 14, color: 'var(--text-dim)', whiteSpace: 'nowrap' }}>
                     {new Date(u.date_joined).toLocaleDateString('en-SA', { month: 'short', day: 'numeric', year: 'numeric' })}
                   </td>
                   <td style={{ padding: '12px 18px' }}>
                     <div style={{ position: 'relative' }}>
                       <button onClick={() => setOpenPlanMenu(openPlanMenu === u.id ? null : u.id)}
                         disabled={changingPlan === u.id}
-                        style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 10px', background: 'var(--bg-elevated)', border: '1px solid var(--border)', borderRadius: 7, cursor: 'pointer', fontSize: 11, color: 'var(--text-muted)', fontFamily: 'Outfit', transition: 'all 0.15s' }}
+                        style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 10px', background: 'var(--bg-elevated)', border: '1px solid var(--border)', borderRadius: 7, cursor: 'pointer', fontSize: 14, color: 'var(--text-muted)', fontFamily: 'Cairo, sans-serif', transition: 'all 0.15s' }}
                         onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = 'var(--primary)'}
                         onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'}
                       >
@@ -193,7 +193,7 @@ export default function AdminDashboard() {
                       {openPlanMenu === u.id && (
                         <div style={{ position: 'absolute', right: 0, top: '105%', zIndex: 20, background: 'var(--bg-card)', border: '1px solid var(--border-light)', borderRadius: 10, overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.5)', minWidth: 140 }}>
                           {(['free','pro','enterprise'] as PlanName[]).map(p => (
-                            <button key={p} onClick={() => changePlan(u.id, p)} style={{ width: '100%', padding: '10px 14px', background: u.profile?.plan?.name === p ? 'var(--primary-glow)' : 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left', fontSize: 12, fontWeight: 600, color: u.profile?.plan?.name === p ? 'var(--primary)' : 'var(--text)', fontFamily: 'Outfit', display: 'flex', alignItems: 'center', gap: 7, transition: 'background 0.1s', borderBottom: '1px solid var(--border)' }}
+                            <button key={p} onClick={() => changePlan(u.id, p)} style={{ width: '100%', padding: '10px 14px', background: u.profile?.plan?.name === p ? 'var(--primary-glow)' : 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left', fontSize: 14, fontWeight: 600, color: u.profile?.plan?.name === p ? 'var(--primary)' : 'var(--text)', fontFamily: 'Cairo, sans-serif', display: 'flex', alignItems: 'center', gap: 7, transition: 'background 0.1s', borderBottom: '1px solid var(--border)' }}
                               onMouseEnter={e => { if (u.profile?.plan?.name !== p) (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; }}
                               onMouseLeave={e => { if (u.profile?.plan?.name !== p) (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
                             >

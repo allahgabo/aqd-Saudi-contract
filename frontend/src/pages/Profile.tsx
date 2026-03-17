@@ -36,7 +36,7 @@ export default function Profile() {
     <div style={{ padding: '32px', maxWidth: 680, margin: '0 auto' }} className="animate-fade-up">
       <div style={{ marginBottom: 32 }}>
         <h1 style={{ fontSize: 28, fontWeight: 900, letterSpacing: '-0.5px', marginBottom: 4 }}>My Profile</h1>
-        <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>Manage your account and view your stats</p>
+        <p style={{ color: 'var(--text-muted)', fontSize: 16 }}>Manage your account and view your stats</p>
       </div>
 
       {/* Avatar card */}
@@ -58,7 +58,7 @@ export default function Profile() {
           <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: '-0.3px', marginBottom: 4 }}>
             {user.first_name ? `${user.first_name} ${user.last_name}` : user.username}
           </div>
-          <div style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 10 }}>{user.email}</div>
+          <div style={{ fontSize: 15, color: 'var(--text-muted)', marginBottom: 10 }}>{user.email}</div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '3px 10px', borderRadius: 99, background: 'var(--green-bg)', border: '1px solid rgba(16,185,129,0.2)', width: 'fit-content' }}>
             <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--green)' }} />
             <span style={{ fontSize: 9.5, fontWeight: 700, color: 'var(--green)', letterSpacing: '0.5px' }}>ACTIVE ACCOUNT</span>
@@ -92,8 +92,8 @@ export default function Profile() {
               <Icon size={13} color="var(--primary)" />
             </div>
             <div>
-              <div style={{ fontSize: 9, color: 'var(--text-dim)', fontWeight: 700, letterSpacing: '0.5px' }}>{label.toUpperCase()}</div>
-              <div style={{ fontSize: 13, fontWeight: 600, marginTop: 1 }}>{value}</div>
+              <div style={{ fontSize: 12, color: 'var(--text-dim)', fontWeight: 700, letterSpacing: '0.5px' }}>{label.toUpperCase()}</div>
+              <div style={{ fontSize: 15, fontWeight: 600, marginTop: 1 }}>{value}</div>
             </div>
           </div>
         ))}
@@ -103,10 +103,10 @@ export default function Profile() {
       <div className="card" style={{ marginBottom: 14 }}>
         <div style={{ fontSize: 9.5, fontWeight: 700, color: 'var(--text-dim)', letterSpacing: '1.5px', marginBottom: 14 }}>QUICK ACTIONS</div>
         <div style={{ display: 'flex', gap: 10 }}>
-          <Link to="/upload" className="btn btn-primary" style={{ flex: 1, textDecoration: 'none', fontSize: 13, padding: '10px' }}>
+          <Link to="/upload" className="btn btn-primary" style={{ flex: 1, textDecoration: 'none', fontSize: 15, padding: '10px' }}>
             <FileText size={13} /> Analyze Contract
           </Link>
-          <Link to="/history" className="btn btn-ghost" style={{ flex: 1, textDecoration: 'none', fontSize: 13, padding: '10px' }}>
+          <Link to="/history" className="btn btn-ghost" style={{ flex: 1, textDecoration: 'none', fontSize: 15, padding: '10px' }}>
             <BarChart3 size={13} /> View History
           </Link>
         </div>
@@ -115,9 +115,9 @@ export default function Profile() {
       <button onClick={handleLogout} style={{
         width: '100%', padding: '13px', background: 'var(--red-bg)',
         border: '1px solid rgba(239,68,68,0.2)', borderRadius: 'var(--radius-sm)',
-        color: 'var(--red)', cursor: 'pointer', fontSize: 13, fontWeight: 700,
+        color: 'var(--red)', cursor: 'pointer', fontSize: 15, fontWeight: 700,
         display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-        fontFamily: 'Outfit', transition: 'background 0.15s',
+        fontFamily: 'Cairo, sans-serif', transition: 'background 0.15s',
       }}
         onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'rgba(239,68,68,0.12)'}
         onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'var(--red-bg)'}

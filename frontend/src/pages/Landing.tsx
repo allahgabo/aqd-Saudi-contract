@@ -129,10 +129,10 @@ export default function Landing() {
           </span>
         </div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          <Link to="/login" className="btn btn-ghost" style={{ fontSize: 13, padding: '8px 18px', textDecoration: 'none' }}>
+          <Link to="/login" className="btn btn-ghost" style={{ fontSize: 15, padding: '8px 18px', textDecoration: 'none' }}>
             Sign In
           </Link>
-          <Link to="/register" className="btn btn-primary" style={{ fontSize: 13, padding: '8px 18px', textDecoration: 'none' }}>
+          <Link to="/register" className="btn btn-primary" style={{ fontSize: 15, padding: '8px 18px', textDecoration: 'none' }}>
             Get Started Free <ArrowRight size={13} />
           </Link>
         </div>
@@ -156,7 +156,7 @@ export default function Landing() {
             background: 'rgba(234,179,8,0.08)', border: '1px solid var(--border-gold)',
           }}>
             <Zap size={12} color="var(--gold)" />
-            <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--gold)', letterSpacing: '1px' }}>
+            <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--gold)', letterSpacing: '1px' }}>
               UPDATED FOR SAUDI LABOR LAW — FEBRUARY 2025
             </span>
           </div>
@@ -196,7 +196,7 @@ export default function Landing() {
               { icon: CheckCircle, text: 'No legal expertise needed' },
               { icon: Globe, text: 'Arabic & English' },
             ].map(({ icon: Icon, text }) => (
-              <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'var(--text-dim)' }}>
+              <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, color: 'var(--text-dim)' }}>
                 <Icon size={13} color="var(--primary)" /> {text}
               </div>
             ))}
@@ -227,7 +227,7 @@ export default function Landing() {
               borderRight: i < STATS.length - 1 ? '1px solid var(--border)' : 'none',
             }}>
               <AnimatedCounter target={value} />
-              <div style={{ fontSize: 12, color: 'var(--text-dim)', fontWeight: 500, marginTop: 4 }}>{label}</div>
+              <div style={{ fontSize: 14, color: 'var(--text-dim)', fontWeight: 500, marginTop: 4 }}>{label}</div>
             </div>
           ))}
         </div>
@@ -236,7 +236,7 @@ export default function Landing() {
       {/* ── HOW IT WORKS ───────────────────────── */}
       <section style={{ padding: '100px 48px', maxWidth: 1100, margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: 64 }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--primary)', letterSpacing: '2px', marginBottom: 14 }}>HOW IT WORKS</div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--primary)', letterSpacing: '2px', marginBottom: 14 }}>HOW IT WORKS</div>
           <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 900, letterSpacing: '-1px', marginBottom: 14 }}>
             Four steps to contract clarity
           </h2>
@@ -256,7 +256,7 @@ export default function Landing() {
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-blue)'; }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = i % 2 === 0 ? 'var(--bg-card)' : 'transparent'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'; }}
             >
-              <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--text-dim)', letterSpacing: '2px', marginBottom: 16 }}>{step}</div>
+              <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--text-dim)', letterSpacing: '2px', marginBottom: 16 }}>{step}</div>
               <div style={{
                 width: 46, height: 46, borderRadius: 13, background: 'var(--primary-glow)',
                 border: '1px solid var(--border-blue)', display: 'flex', alignItems: 'center',
@@ -265,7 +265,7 @@ export default function Landing() {
                 <Icon size={20} color="var(--primary)" />
               </div>
               <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 8 }}>{title}</div>
-              <div style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6 }}>{desc}</div>
+              <div style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.6 }}>{desc}</div>
               {i < HOW_IT_WORKS.length - 1 && (
                 <div style={{
                   position: 'absolute', right: -16, top: '50%', transform: 'translateY(-50%)',
@@ -285,7 +285,7 @@ export default function Landing() {
       <section style={{ padding: '80px 48px', background: 'rgba(11,18,40,0.4)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 60 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--primary)', letterSpacing: '2px', marginBottom: 14 }}>FEATURES</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--primary)', letterSpacing: '2px', marginBottom: 14 }}>FEATURES</div>
             <h2 style={{ fontSize: 'clamp(26px, 4vw, 44px)', fontWeight: 900, letterSpacing: '-1px' }}>
               Everything you need to review any contract
             </h2>
@@ -300,7 +300,7 @@ export default function Landing() {
                   <Icon size={20} color={color} />
                 </div>
                 <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 8 }}>{title}</div>
-                <p style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.7 }}>{desc}</p>
+                <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.7 }}>{desc}</p>
               </div>
             ))}
           </div>
@@ -309,7 +309,7 @@ export default function Landing() {
 
       {/* ── TESTIMONIALS ───────────────────────── */}
       <section style={{ padding: '100px 48px', maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
-        <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--primary)', letterSpacing: '2px', marginBottom: 16 }}>
+        <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--primary)', letterSpacing: '2px', marginBottom: 16 }}>
           WHAT USERS SAY
         </div>
         <h2 style={{ fontSize: 'clamp(24px, 3.5vw, 40px)', fontWeight: 900, letterSpacing: '-1px', marginBottom: 48 }}>
@@ -338,8 +338,8 @@ export default function Landing() {
               <p style={{ fontSize: 17, color: 'var(--text)', lineHeight: 1.7, fontStyle: 'italic', marginBottom: 24 }}>
                 "{t.text}"
               </p>
-              <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{t.name}</div>
-              <div style={{ fontSize: 11, color: 'var(--text-dim)', marginTop: 2 }}>{t.role}</div>
+              <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)' }}>{t.name}</div>
+              <div style={{ fontSize: 14, color: 'var(--text-dim)', marginTop: 2 }}>{t.role}</div>
             </div>
           ))}
         </div>
@@ -388,14 +388,14 @@ export default function Landing() {
       <footer style={{ padding: '32px 48px', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Shield size={15} color="var(--primary)" />
-          <span style={{ fontSize: 14, fontWeight: 700 }}>AQD · عقد</span>
+          <span style={{ fontSize: 16, fontWeight: 700 }}>AQD · عقد</span>
         </div>
-        <p style={{ fontSize: 11, color: 'var(--text-dim)', textAlign: 'center' }}>
+        <p style={{ fontSize: 14, color: 'var(--text-dim)', textAlign: 'center' }}>
           AI-assisted guidance only — not legal advice. Consult a qualified attorney for legal decisions.
         </p>
         <div style={{ display: 'flex', gap: 20 }}>
-          <Link to="/login" style={{ fontSize: 12, color: 'var(--text-dim)', textDecoration: 'none' }}>Sign In</Link>
-          <Link to="/register" style={{ fontSize: 12, color: 'var(--text-dim)', textDecoration: 'none' }}>Register</Link>
+          <Link to="/login" style={{ fontSize: 14, color: 'var(--text-dim)', textDecoration: 'none' }}>Sign In</Link>
+          <Link to="/register" style={{ fontSize: 14, color: 'var(--text-dim)', textDecoration: 'none' }}>Register</Link>
         </div>
       </footer>
     </div>
